@@ -1,0 +1,73 @@
+---
+import { Button } from "@/components/ui/button";
+import { ArrowRight, Layers } from "lucide-react";
+---
+
+<section id="hero" class="animate-blurred-fade-in">
+  {/* Badge */}
+  <div class="text-center mt-20 sm:mt-20 md:mt-28 px-4">
+    <div
+      class="inline-flex items-center gap-2 px-4 py-2 backdrop-blur-xl bg-white/30 rounded-full text-sm font-medium blur-shadow-md"
+    >
+      <span class="relative flex">
+        <span
+          class="animate-ping absolute h-full w-full rounded-full bg-blue-400 opacity-75"
+        ></span>
+        <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-600"
+        ></span>
+      </span>
+      Open to opportunities
+    </div>
+  </div>
+
+  <div
+    class="flex flex-col lg:flex-row items-center mt-8 sm:mt-12 gap-8 lg:gap-12 px-4 sm:px-6 md:px-10"
+  >
+    {/* Content */}
+    <div class="flex-1 w-full">
+      {/* title */}
+      <h1
+        class="text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-6xl font-bold text-neutral-900 leading-tight tracking-tight"
+      >
+        Software Developer
+        <br />
+        <span class="text-blue-600"> Clear Flexible Thoughtful</span>
+      </h1>
+
+      {/* Description */}
+      <p
+        class="mt-2 text-sm sm:text-base md:text-lg lg:text-xl max-w-3xl leading-relaxed text-neutral-600 dark:text-neutral-300"
+      >
+        I build software with clarity and intention, focusing on long-term
+        maintainability and real user needs. I explore different approaches
+        before committing, and I care deeply about making things easy to
+        understand, change, and trust.
+      </p>
+      {/* CTA Section */}
+      <div class="mt-5 sm:mt-6 md:mt-7 lg:mt-8">
+        <!-- TODO: Scroll down to the section -->
+        <Button
+          size="lg"
+          className="bg-blue-600 hover:bg-blue-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 w-full sm:w-auto "
+        >
+          Explore my work
+          <ArrowRight
+            className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1"
+          />
+        </Button>
+        <p
+          class="flex items-center justify-center sm:justify-start text-xs sm:text-sm mt-3 gap-2 text-black/60 font-bold tracking-wide"
+        >
+          <Layers className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-600" />
+          Real collaboration on full-stack projects
+        </p>
+      </div>
+    </div>
+
+    <!-- Hidden Div on Mobile Devices -->
+    <div
+      class="hidden lg:block bg-blue-950 w-50 h-60 rounded-full mr-20 shrink-0 mb-20"
+    >
+    </div>
+  </div>
+</section>

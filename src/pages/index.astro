@@ -3,10 +3,12 @@ import { Navbar } from "@/layouts/Navbar";
 import BgAnimated from "../layouts/BgAnimated.astro";
 import Layout from "../layouts/Layout.astro";
 import "../styles/global.css";
+import Hero from "@/components/sections/Hero.astro";
 ---
 
 <Layout>
   <BgAnimated>
     <Navbar client:load />
-  </BgAnimated>
-</Layout>
+    <Hero />
+  </BgAnimated></Layout
+>

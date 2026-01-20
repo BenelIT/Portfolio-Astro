@@ -26,7 +26,7 @@ export const Navbar = () => {
     setTimeout(() => {
       setIsMobileMenuOpen(false);
       setIsClosing(false);
-    }, 500);
+    }, 400);
   };
 
   const openMobileMenu = () => {
@@ -37,9 +37,9 @@ export const Navbar = () => {
     <>
       <nav
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out",
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-400 ease-out",
           isScrolled
-            ? "py-2 sm:py-3 mx-2 sm:mx-4 lg:mx-10 mt-2 sm:mt-4 rounded-full backdrop-blur-lg shadow-lg transition-all duration-500 supports-backdrop-filter:bg-white/30 glass shadow-glass"
+            ? "py-2 sm:py-3 mx-2 sm:mx-4 lg:mx-10 mt-2 sm:mt-4 rounded-full backdrop-blur-lg shadow-lg transition-all duration-400 supports-backdrop-filter:bg-white/30 glass shadow-glass"
             : "py-4 sm:py-6 bg-transparent",
         )}
       >
@@ -52,7 +52,7 @@ export const Navbar = () => {
               handleNavClick("#hero");
             }}
             className={cn(
-              "font-display font-bold transition-all duration-500",
+              "font-display font-bold transition-all duration-400",
               isScrolled ? "text-lg sm:text-xl" : "text-xl sm:text-2xl",
             )}
           >
@@ -71,7 +71,7 @@ export const Navbar = () => {
                   }}
                   className={cn(
                     "relative px-3 lg:px-5 py-2.5 rounded-full font-medium",
-                    "duration-500 text-slate-800/90 ease-out",
+                    "duration-400 text-slate-800/90 ease-out",
                     "backdrop-blur-sm border border-transparent",
 
                     "hover:backdrop-blur-md hover:border-white/40",
@@ -95,7 +95,7 @@ export const Navbar = () => {
 
                   <span
                     className={cn(
-                      "absolute inset-0 rounded-full -z-10 transition-opacity duration-500",
+                      "absolute inset-0 rounded-full -z-10 transition-opacity duration-400",
                       "bg-linear-to-br from-white/20 to-transparent",
                       "opacity-20 hover:opacity-100",
                     )}
@@ -109,9 +109,9 @@ export const Navbar = () => {
           {/* Download Button */}
           <button
             className={cn(
-              "cursor-pointer hidden md:block font-medium rounded-xl backdrop-blur-md transition-all duration-500 hover:shadow-glass-hover hover:scale-105",
+              "cursor-pointer hidden md:block font-medium rounded-xl backdrop-blur-md transition-all duration-400 hover:shadow-glass-hover hover:scale-105",
               isScrolled
-                ? "bg-transparent text-slate-700 border border-slate-500 px-3 lg:px-4 py-2 text-xs lg:text-sm hover:bg-white/20"
+                ? "bg-transparent text-slate-700 border border-slate-300 px-3 lg:px-4 py-2 text-xs lg:text-sm hover:bg-white/20"
                 : "bg-white/30 text-slate-800 border border-white/50 px-4 lg:px-6 py-2.5 lg:py-3 text-sm lg:text-base hover:bg-white/40",
             )}
             onClick={() => handleNavClick("#contact")}
@@ -125,7 +125,7 @@ export const Navbar = () => {
             onClick={() =>
               isMobileMenuOpen ? closeMobileMenu() : openMobileMenu()
             }
-            className="md:hidden p-2 rounded-lg backdrop-blur-md transition-all duration-500 relative z-60"
+            className="md:hidden p-2 rounded-lg backdrop-blur-md transition-all duration-400 relative z-60"
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? (
@@ -143,7 +143,7 @@ export const Navbar = () => {
           {/* Backdrop */}
           <div
             className={cn(
-              "absolute inset-0 backdrop-blur-sm transition-opacity duration-500",
+              "absolute inset-0 backdrop-blur-sm transition-opacity duration-400",
               isClosing ? "opacity-0" : "opacity-100",
             )}
             onClick={closeMobileMenu}
@@ -153,7 +153,7 @@ export const Navbar = () => {
           <div
             className={cn(
               "absolute top-4 left-4 right-4 backdrop-blur-3xl bg-linear-to-br from-white/80 to-white/60",
-              "border border-white/50 rounded-3xl p-6 shadow-2xl transition-all duration-500",
+              "border border-white/50 rounded-3xl p-6 shadow-2xl transition-all duration-400",
               isClosing
                 ? "animate-out slide-out-to-top opacity-0 scale-95"
                 : "animate-in slide-in-from-top opacity-100 scale-100",
@@ -168,7 +168,7 @@ export const Navbar = () => {
                       e.preventDefault();
                       handleNavClick(link.href);
                     }}
-                    className="block px-4 py-3 rounded-xl font-medium text-slate-800 transition-all duration-500"
+                    className="block px-4 py-3 rounded-xl font-medium text-slate-800 transition-all duration-400"
                   >
                     {link.label}
                   </a>
@@ -179,7 +179,7 @@ export const Navbar = () => {
             <div className="mt-6 pt-6 border-t border-slate-200">
               <button
                 onClick={() => handleNavClick("#contact")}
-                className="w-full px-6 py-3 bg-white/60 text-slate-800 border border-white rounded-2xl transition-all duration-500"
+                className="w-full px-6 py-3 bg-white/60 text-slate-800 border border-white rounded-2xl transition-all duration-400"
               >
                 Download resume
               </button>
