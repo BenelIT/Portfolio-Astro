@@ -1,0 +1,33 @@
+---
+import { MapPin } from "lucide-react";
+import SocialLinks from "./SocialLinks.astro";
+---
+
+<div class="flex h-40 gap-4">
+  {/* Avatar placeholder */}
+  <div
+    class="bg-linear-to-br from-blue-500 to-cyan-500
+          w-35 h-35 rounded-full shadow-lg text-5xl font-bold
+          mb-6 flex items-center justify-center text-white"
+  >
+    CC
+  </div>
+
+  {/* Personal Info */}
+  <div class="mt-5">
+    <h3 class="text-2xl font-bold text-neutral-900 leading-tight">
+      Cristóbal Coronel
+    </h3>
+
+    <p class="text-blue-600 font-semibold">Full-Stack Developer</p>
+
+    {/* Location */}
+    <div class="flex items-center gap-1 text-sm text-neutral-600">
+      <MapPin className="w-3.5 h-3.5" />
+      <span>Chiapas, Mexico</span>
+    </div>
+
+    {/* Social Links */}
+    <SocialLinks />
+  </div>
+</div>
