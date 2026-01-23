@@ -4,7 +4,8 @@ import BgAnimated from "../layouts/BgAnimated.astro";
 import Layout from "../layouts/Layout.astro";
 import "../styles/global.css";
 import Hero from "@/components/sections/hero/Hero.astro";
-import AboutSection from "@/components/about/AboutSection.astro";
+import AboutSection from "@/components/sections/about/AboutSection.astro";
+import ProjectsSection from "@/components/projects/ProjectsSection.astro";
 ---
 
 <Layout>
@@ -12,5 +13,6 @@ import AboutSection from "@/components/about/AboutSection.astro";
     <Navbar client:load />
     <Hero />
     <AboutSection />
+    <ProjectsSection />
   </BgAnimated></Layout
 >

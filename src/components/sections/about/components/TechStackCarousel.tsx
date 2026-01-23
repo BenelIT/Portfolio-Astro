@@ -1,4 +1,4 @@
-import { type TechStackData } from "@/components/about/data/techStackData";
+import { type TechStackData } from "@/components/sections/about/data/techStackData";
 import { Layers, Monitor } from "lucide-react";
 import React, { useState, type FC } from "react";
 
