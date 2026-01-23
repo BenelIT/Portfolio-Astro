@@ -1,4 +1,3 @@
-import React from "react";
 import { ProjectsMock } from "../data/Projects.data";
 import { ProjectsCard } from "./ProjectsCard";
 

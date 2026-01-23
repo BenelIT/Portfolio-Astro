@@ -1,7 +1,6 @@
 import { type FC } from "react";
 
 import { ExternalLink, Github } from "lucide-react";
-
 import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
 
 import type { Project } from "../types/Project.type";
