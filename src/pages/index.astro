@@ -1,11 +1,16 @@
 ---
-import { Navbar } from "@/layouts/Navbar";
-import BgAnimated from "../layouts/BgAnimated.astro";
-import Layout from "../layouts/Layout.astro";
+import { Toaster } from "sonner";
+
 import "../styles/global.css";
+
+import { Navbar } from "@/layouts/Navbar";
+import BgAnimated from "@/layouts/BgAnimated.astro";
+import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/sections/hero/Hero.astro";
 import AboutSection from "@/components/sections/about/AboutSection.astro";
 import ProjectsSection from "@/components/sections/projects/ProjectsSection.astro";
+import ContactSection from "@/components/sections/contact/ContactSection.astro";
+import Footer from "@/layouts/Footer.astro";
 ---
 
 <Layout>
@@ -14,5 +19,8 @@ import ProjectsSection from "@/components/sections/projects/ProjectsSection.astr
     <Hero />
     <AboutSection />
     <ProjectsSection />
-  </BgAnimated></Layout
->
+    <ContactSection />
+    <Footer />
+  </BgAnimated>
+  <Toaster client:load richColors position="top-left" />
+</Layout>
