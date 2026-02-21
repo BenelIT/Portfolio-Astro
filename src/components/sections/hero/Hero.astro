@@ -66,8 +66,44 @@ import { ArrowRight, Layers } from "lucide-react";
 
     <!-- Hidden Div on Mobile Devices -->
     <div
-      class="hidden lg:block bg-blue-950 w-50 h-60 rounded-full mr-20 shrink-0 mb-20"
+      class="hidden lg:flex justify-center items-center shrink-0 mb-20 mr-10"
     >
+      <div class="relative">
+        {/* Anillo decorativo exterior */}
+        <div
+          class="absolute inset-0 rounded-full bg-linear-to-br from-blue-400 via-blue-600 to-blue-950 p-0.75 scale-105 opacity-40 blur-sm"
+        >
+        </div>
+
+        {/* Anillo principal */}
+        <div
+          class="relative rounded-full bg-linear-to-br from-blue-400 via-blue-600 to-blue-950 p-0.75"
+        >
+          <div
+            class="rounded-full overflow-hidden w-56 h-56 xl:w-64 xl:h-64 bg-white"
+          >
+            <img
+              src="/src/assets/about-me/img1.JPEG"
+              alt="Cristobal"
+              class="w-full h-full object-cover object-top"
+            />
+          </div>
+        </div>
+
+        {/* Badge flotante */}
+        <div
+          class="absolute -bottom-3 -right-3 bg-white rounded-2xl px-3 py-2 shadow-lg border border-white/60 backdrop-blur-sm flex items-center gap-2"
+        >
+          <span class="relative flex">
+            <span
+              class="animate-ping absolute h-full w-full rounded-full bg-blue-400 opacity-75"
+            ></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-600"
+            ></span>
+          </span>
+          <span class="text-xs font-semibold text-neutral-700">Available</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
