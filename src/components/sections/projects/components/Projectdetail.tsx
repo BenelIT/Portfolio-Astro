@@ -74,7 +74,7 @@ function Lightbox({
       {/* Close */}
       <button
         onClick={onClose}
-        className="absolute top-5 right-5 z-10 rounded-full p-2
+        className="absolute top-4 right-4 z-10 rounded-full p-2
           bg-white/10 border border-white/20 text-white
           hover:bg-white/25 transition-colors cursor-pointer"
       >
@@ -82,7 +82,7 @@ function Lightbox({
       </button>
 
       {/* Counter */}
-      <span className="absolute top-6 left-1/2 -translate-x-1/2 text-white/60 text-sm font-medium tabular-nums">
+      <span className="absolute top-5 left-1/2 -translate-x-1/2 text-white/60 text-sm font-medium tabular-nums">
         {current + 1} / {images.length}
       </span>
 
@@ -93,18 +93,18 @@ function Lightbox({
             e.stopPropagation();
             prev();
           }}
-          className="absolute left-4 z-10 rounded-full p-3
+          className="absolute left-2 sm:left-4 z-10 rounded-full p-2 sm:p-3
             bg-white/10 border border-white/20 text-white
             hover:bg-white/25 transition-colors cursor-pointer"
         >
-          <ChevronLeft size={22} />
+          <ChevronLeft size={20} />
         </button>
       )}
 
       {/* Image */}
       <div
-        className="relative max-w-5xl max-h-[85vh] w-full mx-16
-          rounded-2xl overflow-hidden ring-1 ring-white/20 shadow-2xl"
+        className="relative w-full mx-8 sm:mx-16 max-w-5xl
+          rounded-xl sm:rounded-2xl overflow-hidden ring-1 ring-white/20 shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         <picture key={current}>
@@ -113,7 +113,10 @@ function Lightbox({
             src={images[current]}
             alt={`Screenshot ${current + 1}`}
             className="w-full h-full object-contain"
-            style={{ maxHeight: "85vh", imageRendering: "crisp-edges" }}
+            style={{
+              maxHeight: "80vh",
+              imageRendering: "crisp-edges",
+            }}
             loading="eager"
             decoding="async"
             fetchPriority="high"
@@ -128,13 +131,18 @@ function Lightbox({
             e.stopPropagation();
             next();
           }}
-          className="absolute right-4 z-10 rounded-full p-3
+          className="absolute right-2 sm:right-4 z-10 rounded-full p-2 sm:p-3
             bg-white/10 border border-white/20 text-white
             hover:bg-white/25 transition-colors cursor-pointer"
         >
-          <ChevronRight size={22} />
+          <ChevronRight size={20} />
         </button>
       )}
+
+      {/* Mobile swipe hint */}
+      <p className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/30 text-xs sm:hidden">
+        Desliza los botones para navegar
+      </p>
     </div>
   );
 }
@@ -145,7 +153,7 @@ export const ProjectDetailPage = ({ project }: ProjectDetailPageProps) => {
   const galleryImages = project.images?.slice(1) ?? [];
 
   return (
-    <div className="relative min-h-screen text-neutral-900">
+    <div className="px-4 sm:px-6 md:px-8 lg:px-10 relative min-h-screen text-neutral-900">
       <div className="relative z-10">
         {/* HERO */}
         <section className="max-w-7xl mx-auto mt-12 mb-12 ">

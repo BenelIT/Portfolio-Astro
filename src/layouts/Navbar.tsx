@@ -3,6 +3,7 @@ import { scrollToSection } from "@/utils/scrollToSection";
 import { useScrolled } from "@/hooks/useScrolled";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import cv from "@/assets/about-me/CV_Cristobal_Coronel_Chambe.pdf";
 
 const navLinks = [
   { label: "Inicio", href: "#hero" },
@@ -107,18 +108,20 @@ export const Navbar = () => {
           </ul>
 
           {/* Download Button */}
-          <button
+          <a
+            href={cv}
+            target="_blank"
+            rel="noopener noreferrer"
             className={cn(
               "cursor-pointer hidden md:block font-medium rounded-xl backdrop-blur-md transition-all duration-400 hover:shadow-glass-hover hover:scale-105",
               isScrolled
                 ? "bg-transparent text-slate-700 border border-slate-300 px-3 lg:px-4 py-2 text-xs lg:text-sm hover:bg-white/20"
                 : "bg-white/30 text-slate-800 border border-white/50 px-4 lg:px-6 py-2.5 lg:py-3 text-sm lg:text-base hover:bg-white/40",
             )}
-            onClick={() => handleNavClick("#contact")}
           >
             <span className="hidden lg:inline">Descargar currículum</span>
             <span className="lg:hidden">currículum</span>
-          </button>
+          </a>
 
           {/* Mobile Menu Button */}
           <button
@@ -177,12 +180,14 @@ export const Navbar = () => {
             </ul>
 
             <div className="mt-6 pt-6 border-t border-slate-200">
-              <button
-                onClick={() => handleNavClick("#contact")}
-                className="w-full px-6 py-3 bg-white/60 text-slate-800 border border-white rounded-2xl transition-all duration-400"
+              <a
+                href={cv}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full px-6 py-3 bg-white/60 text-slate-800 border border-white rounded-2xl transition-all duration-400 text-center"
               >
-                Download resume
-              </button>
+                Descargar currículum
+              </a>
             </div>
           </div>
         </div>

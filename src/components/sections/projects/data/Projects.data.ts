@@ -153,7 +153,7 @@ export const Projects: Project[] = [
 
     githubUrl: "https://github.com/D-Amores/siape-gob",
 
-    tags: ["Government", "Role-Based System", "Fullstack"],
+    tags: ["Laravel", "PHP", "Blade"],
     mainImage: `${kananBase}/dashboard.webp`,
     images: kananImages,
   },
@@ -223,7 +223,7 @@ export const Projects: Project[] = [
     videoDemo: undefined,
 
     // Additional metadata
-    tags: ["Education", "Language Learning", "Vocabulary", "Multilingual"],
+    tags: ["React", "TypeScript", "Shadcn/ui", "Multilingüe"],
   },
   {
     id: "tesloshop",
@@ -303,7 +303,7 @@ export const Projects: Project[] = [
     images: tesloImages,
 
     // Additional metadata
-    tags: ["E-commerce", "React", "TypeScript", "TailwindCSS"],
+    tags: ["React", "TypeScript", "Tanstack Query", "Zustand", "E-commerce"],
   },
   {
     id: "siop", // or your preferred ID
@@ -381,16 +381,6 @@ export const Projects: Project[] = [
     videoDemo: undefined, // Add if you create a demo video
 
     // Additional metadata
-    tags: [
-      "Enterprise",
-      "Government",
-      "Construction Management",
-      "Public Works",
-      "ASP.NET",
-      "Web API",
-      "SQL Server",
-      "CRUD",
-      "Spanish",
-    ],
+    tags: ["ASP.NET", "SQL Server", "C#"],
   },
 ];
