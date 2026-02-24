@@ -5,12 +5,18 @@ import SocialLinks from "./SocialLinks.astro";
 
 <div class="flex h-40 gap-4">
   {/* Avatar placeholder */}
-  <div
-    class="bg-linear-to-br from-blue-500 to-cyan-500
-          w-35 h-35 rounded-full shadow-lg text-5xl font-bold
-          mb-6 flex items-center justify-center text-white"
-  >
-    CC
+  <div class="relative mb-6">
+    <div
+      class="rounded-full bg-linear-to-br from-blue-400 via-blue-600 to-blue-950 p-0.75"
+    >
+      <div class="rounded-full overflow-hidden w-35 h-35 bg-white">
+        <img
+          src="/src/assets/about-me/img1.JPEG"
+          alt="Cristobal"
+          class="w-full h-full object-cover object-top"
+        />
+      </div>
+    </div>
   </div>
 
   {/* Personal Info */}

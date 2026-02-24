@@ -15,12 +15,12 @@ import Footer from "@/layouts/Footer.astro";
 
 <Layout>
   <BgAnimated>
-    <Navbar client:load />
+    <Navbar client:idle />
     <Hero />
     <AboutSection />
     <ProjectsSection />
     <ContactSection />
     <Footer />
   </BgAnimated>
-  <Toaster client:load richColors position="top-left" />
+  <Toaster client:idle richColors position="top-left" />
 </Layout>

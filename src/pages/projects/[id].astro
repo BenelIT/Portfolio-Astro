@@ -1,0 +1,23 @@
+---
+import "../../styles/global.css";
+
+import Layout from "@/layouts/Layout.astro";
+import BgAnimated from "@/layouts/BgAnimated.astro";
+import { Projects } from "@/components/sections/projects/data/Projects.data";
+import { ProjectDetailPage } from "@/components/sections/projects/components/Projectdetail";
+
+export function getStaticPaths() {
+  return Projects.map((project) => ({
+    params: { id: String(project.id) },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+---
+
+<Layout>
+  <BgAnimated>
+    <ProjectDetailPage project={project} onBack="/" client:load />
+  </BgAnimated>
+</Layout>
