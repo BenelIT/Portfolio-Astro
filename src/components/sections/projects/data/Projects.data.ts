@@ -50,7 +50,7 @@ const griotImages = [
   "speedRound",
   "speedRoundFInal",
   "speedRoundStart",
-].map((name) => `${griotBase}/${name}.png`);
+].map((name) => `${griotBase}/${name}.webp`);
 
 const tesloBase = "/src/assets/projects/tesloshop";
 const tesloImages = [
@@ -61,7 +61,7 @@ const tesloImages = [
   "adminProducts",
   "adminProduct",
   "adminProduct2",
-].map((name) => `${tesloBase}/${name}.png`);
+].map((name) => `${tesloBase}/${name}.webp`);
 
 const siopBase = "/src/assets/projects/siop";
 const siopImages = [
@@ -100,7 +100,7 @@ const siopImages = [
   "SEINFRAC10",
   "SEINFRAC15",
   "SEINFRAC6",
-].map((name) => `${siopBase}/${name}.png`);
+].map((name) => `${siopBase}/${name}.webp`);
 
 export const Projects: Project[] = [
   {
@@ -220,7 +220,7 @@ export const Projects: Project[] = [
 
     // Links and media
     githubUrl: "https://github.com/BenelIT/griot-frontend", // Ajustar con tu URL
-    mainImage: `${griotBase}/lenguagesDashboard.png`,
+    mainImage: `${griotBase}/lenguagesDashboard.webp`,
     images: griotImages,
     videoDemo: undefined,
 
@@ -300,7 +300,7 @@ export const Projects: Project[] = [
 
     // Links and media
     githubUrl: "https://github.com/BenelIT/teslo-shop-frontend", // Agregar tu repositorio
-    mainImage: `${tesloBase}/dashboard.png`,
+    mainImage: `${tesloBase}/dashboard.webp`,
     images: tesloImages,
 
     // Additional metadata
@@ -377,7 +377,7 @@ export const Projects: Project[] = [
     liveUrl: undefined, // Add if deployed
     githubUrl: undefined,
     isPrivate: true, // En frontend mostrar algo como Repositorio privado (proyecto gubernamental) o algo asi serio
-    mainImage: `${siopBase}/Main.png`,
+    mainImage: `${siopBase}/Main.webp`,
     images: siopImages,
     videoDemo: undefined, // Add if you create a demo video
 
