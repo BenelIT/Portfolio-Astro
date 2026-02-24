@@ -5,10 +5,10 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
-  { label: "Home", href: "#hero" },
-  { label: "About Me", href: "#about" },
-  { label: "Projects", href: "#projects" },
-  { label: "Contact", href: "#contact" },
+  { label: "Inicio", href: "#hero" },
+  { label: "Sobre mí", href: "#about" },
+  { label: "Proyectos", href: "#projects" },
+  { label: "Contacto", href: "#contact" },
 ];
 
 export const Navbar = () => {
@@ -116,8 +116,8 @@ export const Navbar = () => {
             )}
             onClick={() => handleNavClick("#contact")}
           >
-            <span className="hidden lg:inline">Download resume</span>
-            <span className="lg:hidden">Resume</span>
+            <span className="hidden lg:inline">Descargar currículum</span>
+            <span className="lg:hidden">currículum</span>
           </button>
 
           {/* Mobile Menu Button */}

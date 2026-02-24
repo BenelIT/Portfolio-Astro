@@ -10,7 +10,7 @@ import { Mail, MapPin, Phone, Github, Linkedin } from "lucide-react";
     <h2
       class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-900"
     >
-      Let's build something solid
+      Construyamos algo sólido
     </h2>
     <div
       class="h-1 sm:h-1.5 mt-2 w-74 sm:w-80 md:w-100 lg:w-158 bg-linear-to-r from-blue-600 to-cyan-500 rounded-full"
@@ -53,7 +53,7 @@ import { Mail, MapPin, Phone, Github, Linkedin } from "lucide-react";
               Cristóbal Coronel
             </h3>
             <p class="text-blue-600 font-semibold mb-1 text-sm sm:text-base">
-              Full-Stack Developer
+              Desarrollador Full-Stack
             </p>
             <div class="flex items-center gap-1.5 text-sm text-neutral-600">
               <MapPin className="w-4 h-4 shrink-0" />
@@ -67,12 +67,12 @@ import { Mail, MapPin, Phone, Github, Linkedin } from "lucide-react";
           class="bg-white/15 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-5 mt-3 border border-white/30"
         >
           <h4 class="text-base sm:text-lg font-semibold text-slate-800 mb-2">
-            Let's Connect
+            Conectemos
           </h4>
           <p class="text-slate-600 text-sm leading-relaxed">
-            Feel free to reach out through any of the channels listed. I'm
-            always open to discussing new projects, creative ideas, or
-            opportunities to be part of your vision.
+            No dudes en contactarme a través de cualquiera de los canales
+            indicados. Siempre estoy abierto a hablar sobre nuevos proyectos,
+            ideas creativas u oportunidades para formar parte de tu visión.
           </p>
         </div>
       </div>
@@ -80,7 +80,7 @@ import { Mail, MapPin, Phone, Github, Linkedin } from "lucide-react";
       {/* Right Content - Contact Methods */}
       <div class="space-y-4">
         <h3 class="text-lg sm:text-xl font-bold text-slate-800 mb-4 sm:mb-5">
-          Contact Information
+          Información de Contacto
         </h3>
 
         {/* Contact Cards Grid */}
@@ -102,7 +102,7 @@ import { Mail, MapPin, Phone, Github, Linkedin } from "lucide-react";
               <p
                 class="text-xs font-medium text-slate-500 uppercase tracking-wide mb-1"
               >
-                Email
+                Correo electrónico
               </p>
               <p
                 class="text-slate-800 font-medium text-xs sm:text-sm break-all sm:wrap-break-word"
@@ -129,7 +129,7 @@ import { Mail, MapPin, Phone, Github, Linkedin } from "lucide-react";
               <p
                 class="text-xs font-medium text-slate-500 uppercase tracking-wide mb-1"
               >
-                Phone
+                Teléfono
               </p>
               <p class="text-slate-800 font-medium text-xs sm:text-sm">
                 +52 961 348 1926
@@ -207,7 +207,7 @@ import { Mail, MapPin, Phone, Github, Linkedin } from "lucide-react";
       const email = emailContact.dataset.email;
       if (email) {
         navigator.clipboard.writeText(email);
-        toast.success("Email copied to clipboard");
+        toast.success("Correo electrónico copiado al portapapeles");
       }
     });
   }
@@ -219,7 +219,7 @@ import { Mail, MapPin, Phone, Github, Linkedin } from "lucide-react";
       const phone = phoneContact.dataset.phone;
       if (phone) {
         navigator.clipboard.writeText(phone);
-        toast.success("Phone number copied to clipboard");
+        toast.success("Número de teléfono copiado al portapapeles");
       }
     });
   }

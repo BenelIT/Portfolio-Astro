@@ -1,3 +1,6 @@
+"use client";
+
+import { useState, useEffect, useCallback } from "react";
 import {
   ArrowLeft,
   Code2,
@@ -14,6 +17,10 @@ import {
   GitMerge,
   LayoutDashboard,
   TrendingUp,
+  X,
+  ChevronLeft,
+  ChevronRight,
+  ZoomIn,
 } from "lucide-react";
 import type { Project } from "../types/Project.type";
 import { Button } from "@/components/ui/button";
@@ -22,7 +29,115 @@ interface ProjectDetailPageProps {
   project: Project;
 }
 
+// ─── Lightbox ────────────────────────────────────────────────────────────────
+function Lightbox({
+  images,
+  startIndex,
+  onClose,
+}: {
+  images: string[];
+  startIndex: number;
+  onClose: () => void;
+}) {
+  const [current, setCurrent] = useState(startIndex);
+
+  const prev = useCallback(
+    () => setCurrent((c) => (c - 1 + images.length) % images.length),
+    [images.length],
+  );
+  const next = useCallback(
+    () => setCurrent((c) => (c + 1) % images.length),
+    [images.length],
+  );
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowLeft") prev();
+      if (e.key === "ArrowRight") next();
+    };
+    window.addEventListener("keydown", handler);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", handler);
+      document.body.style.overflow = "";
+    };
+  }, [onClose, prev, next]);
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center"
+      onClick={onClose}
+      style={{ background: "rgba(0,0,0,0.85)", backdropFilter: "blur(12px)" }}
+    >
+      {/* Close */}
+      <button
+        onClick={onClose}
+        className="absolute top-5 right-5 z-10 rounded-full p-2
+          bg-white/10 border border-white/20 text-white
+          hover:bg-white/25 transition-colors cursor-pointer"
+      >
+        <X size={20} />
+      </button>
+
+      {/* Counter */}
+      <span className="absolute top-6 left-1/2 -translate-x-1/2 text-white/60 text-sm font-medium tabular-nums">
+        {current + 1} / {images.length}
+      </span>
+
+      {/* Prev */}
+      {images.length > 1 && (
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            prev();
+          }}
+          className="absolute left-4 z-10 rounded-full p-3
+            bg-white/10 border border-white/20 text-white
+            hover:bg-white/25 transition-colors cursor-pointer"
+        >
+          <ChevronLeft size={22} />
+        </button>
+      )}
+
+      {/* Image */}
+      <div
+        className="relative max-w-5xl max-h-[85vh] w-full mx-16
+          rounded-2xl overflow-hidden ring-1 ring-white/20 shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <img
+          key={current}
+          src={images[current]}
+          alt={`Screenshot ${current + 1}`}
+          className="w-full h-full object-contain"
+          style={{ maxHeight: "85vh" }}
+        />
+      </div>
+
+      {/* Next */}
+      {images.length > 1 && (
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            next();
+          }}
+          className="absolute right-4 z-10 rounded-full p-3
+            bg-white/10 border border-white/20 text-white
+            hover:bg-white/25 transition-colors cursor-pointer"
+        >
+          <ChevronRight size={22} />
+        </button>
+      )}
+    </div>
+  );
+}
+
+// ─── Page ─────────────────────────────────────────────────────────────────────
 export const ProjectDetailPage = ({ project }: ProjectDetailPageProps) => {
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const galleryImages = project.images?.slice(1) ?? [];
+
   return (
     <div className="relative min-h-screen text-neutral-900">
       <div className="relative z-10">
@@ -39,7 +154,7 @@ export const ProjectDetailPage = ({ project }: ProjectDetailPageProps) => {
                   size={16}
                   className="transition-transform duration-300 group-hover:-translate-x-1"
                 />
-                Back
+                Volver
               </Button>
             </a>
           </div>
@@ -191,7 +306,7 @@ export const ProjectDetailPage = ({ project }: ProjectDetailPageProps) => {
                       />
                     )}
                     <h2 className="text-xl font-semibold">
-                      {i === 0 ? "Problem" : "Solution"}
+                      {i === 0 ? "Problema" : "Solución"}
                     </h2>
                   </div>
                   <p className="text-neutral-800 leading-7 text-sm">
@@ -208,12 +323,12 @@ export const ProjectDetailPage = ({ project }: ProjectDetailPageProps) => {
             <div className="flex items-center gap-3 mb-5">
               <Sparkles size={18} className="text-neutral-600" />
               <h2 className="text-2xl font-semibold tracking-tight">
-                Key Features
+                Características clave
               </h2>
             </div>
 
             <div className="grid md:grid-cols-3 gap-4">
-              {project.keyFeatures.map((f, i) => (
+              {project.keyFeatures.map((f) => (
                 <div
                   key={f}
                   className="group relative rounded-2xl p-6 backdrop-blur-lg bg-white/10 hover:bg-white/20 border border-white/30 
@@ -243,7 +358,7 @@ export const ProjectDetailPage = ({ project }: ProjectDetailPageProps) => {
                   <div className="flex items-center gap-3 mb-6">
                     <Network size={18} className="text-neutral-600 shrink-0" />
                     <h2 className="text-xl font-semibold">
-                      System Architecture
+                      Arquitectura del sistema
                     </h2>
                   </div>
                   <p className="text-neutral-800 leading-7">
@@ -259,7 +374,7 @@ export const ProjectDetailPage = ({ project }: ProjectDetailPageProps) => {
                       size={18}
                       className="text-neutral-600 shrink-0"
                     />
-                    <h2 className="text-xl font-semibold">Impact</h2>
+                    <h2 className="text-xl font-semibold">Impacto</h2>
                   </div>
                   <p className="text-neutral-800 leading-7">{project.impact}</p>
                 </div>
@@ -274,9 +389,7 @@ export const ProjectDetailPage = ({ project }: ProjectDetailPageProps) => {
             <div className="rounded-3xl p-10 backdrop-blur-2xl bg-white/15 border border-white/30 shadow-2xl">
               <div className="flex items-center gap-3 mb-6">
                 <Wrench size={16} className="text-neutral-600 shrink-0" />
-                <h2 className="text-xl font-semibold">
-                  Engineering Challenges
-                </h2>
+                <h2 className="text-xl font-semibold">Desafíos técnicos</h2>
               </div>
               <ul className="space-y-3">
                 {project.challenges.map((challenge) => (
@@ -297,7 +410,7 @@ export const ProjectDetailPage = ({ project }: ProjectDetailPageProps) => {
               <div className="flex items-center gap-3 mb-6">
                 <GitMerge size={16} className="text-neutral-600 shrink-0" />
                 <h2 className="text-xl font-semibold">
-                  Key Technical Decisions
+                  Decisiones técnicas clave
                 </h2>
               </div>
               <ul className="space-y-3">
@@ -316,36 +429,61 @@ export const ProjectDetailPage = ({ project }: ProjectDetailPageProps) => {
         </section>
 
         {/* GALLERY */}
-        {project.images?.length > 1 && (
+        {galleryImages.length > 0 && (
           <section className="max-w-7xl mx-auto pb-12">
             <div className="flex items-center gap-3 mb-5">
               <LayoutDashboard
                 size={18}
                 className="text-neutral-600 shrink-0"
               />
-              <h2 className="text-2xl font-semibold">Interface Preview</h2>
+              <h2 className="text-2xl font-semibold">
+                Vista previa de la interfaz
+              </h2>
             </div>
 
             <div className="grid md:grid-cols-2 gap-8">
-              {project.images.slice(1).map((img, i) => (
+              {galleryImages.map((img, i) => (
                 <div
                   key={i}
-                  className="rounded-2xl p-3
-            backdrop-blur-lg bg-white/15
-            border border-white/30 ring-1 ring-white/30
-            shadow-2xl"
+                  onClick={() => setLightboxIndex(i)}
+                  className="group relative rounded-2xl p-3 cursor-zoom-in
+                    backdrop-blur-lg bg-white/15
+                    border border-white/30 ring-1 ring-white/30
+                    shadow-2xl transition-transform hover:scale-[1.015]"
                 >
                   <img
                     src={img}
                     alt={`Screenshot ${i + 1}`}
                     className="rounded-xl w-full object-cover"
                   />
+                  {/* Hover overlay */}
+                  <div
+                    className="absolute inset-3 rounded-xl flex items-center justify-center
+                    bg-black/0 group-hover:bg-black/25 transition-colors"
+                  >
+                    <div
+                      className="opacity-0 group-hover:opacity-100 transition-opacity
+                      bg-white/20 backdrop-blur-sm border border-white/30
+                      rounded-full p-3 shadow-lg"
+                    >
+                      <ZoomIn size={20} className="text-white" />
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
           </section>
         )}
       </div>
+
+      {/* LIGHTBOX */}
+      {lightboxIndex !== null && (
+        <Lightbox
+          images={galleryImages}
+          startIndex={lightboxIndex}
+          onClose={() => setLightboxIndex(null)}
+        />
+      )}
     </div>
   );
 };

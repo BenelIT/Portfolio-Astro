@@ -44,7 +44,7 @@ export const ProjectsCard = ({ project }: Props) => {
           className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-blue-600 hover:bg-blue-800 text-white rounded-xl font-semibold transition-colors duration-200 group/btn text-sm"
           onClick={(e) => e.stopPropagation()}
         >
-          <span>View More</span>
+          <span>Ver más</span>
           <ExternalLink className="w-4 h-4 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform duration-200" />
         </a>
         {project.githubUrl && (
