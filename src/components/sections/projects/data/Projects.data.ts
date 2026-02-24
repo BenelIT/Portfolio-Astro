@@ -2,28 +2,30 @@ import type { Project } from "../types/Project.type";
 
 const kananBase = "/src/assets/projects/kanan";
 const kananImages = [
-  "acceptAssignments",
-  "addAssets",
-  "addAssignments",
+  "dashboard",
+  "dashboard",
+  "login",
+  "createPersonnel",
+  "personnelDashboard",
+  "createUsers",
+  "usersDashboard",
   "addBrand",
+  "brandDashboard",
   "addCategory",
+  "categoryDashboard",
+  "addAssets",
   "assetsDashboard",
+  "addAssignments",
+  "acceptAssignments",
+  "assignment",
   "assetsDetails",
   "assetsDetails2",
-  "assignment",
-  "brandDashboard",
-  "categoryDashboard",
-  "createPersonnel",
-  "createReport",
-  "createUsers",
-  "login",
   "personnelAssets",
-  "personnelDashboard",
-  "reports",
+  "createReport",
   "reportsDahsboard",
+  "reports",
   "reportsDetails",
-  "usersDashboard",
-].map((name) => `${kananBase}/${name}.png`);
+].map((name) => `${kananBase}/${name}.webp`);
 
 const griotBase = "/src/assets/projects/griot";
 const griotImages = [
@@ -102,11 +104,11 @@ const siopImages = [
 
 export const Projects: Project[] = [
   {
-    id: 1,
+    id: "kanan",
     title: "Kanan",
     year: "2025",
     status: "completed",
-    role: "Full Stack Developer",
+    role: "Desarrollador Full Stack",
 
     shortDescription:
       "Sistema web para la gestión y trazabilidad de bienes gubernamentales, reemplazando procesos manuales en Excel por una plataforma centralizada con control de roles y bitácora de movimientos.",
@@ -115,7 +117,7 @@ export const Projects: Project[] = [
       "La gestión de activos gubernamentales se realizaba mediante hojas de Excel, generando errores humanos, falta de trazabilidad, inconsistencias en asignaciones y riesgos de seguridad en la manipulación de información.",
 
     solution:
-      "Diseñé y desarrollé un sistema monolítico modular basado en Laravel 12 que centraliza la gestión de activos, implementando control de acceso por roles, bitácora histórica de movimientos y flujos diferenciados para asignación, mantenimiento y consulta.",
+      "Desarrollamos en equipo un sistema monolítico modular con Laravel 12 para centralizar la gestión de activos, implementando control de acceso por roles, bitácora histórica de movimientos y flujos diferenciados para asignación, mantenimiento y consulta.",
 
     impact:
       "Digitalización completa del inventario institucional, mejora en trazabilidad de bienes y reducción de errores humanos al automatizar asignaciones, movimientos y registros históricos.",
@@ -131,13 +133,11 @@ export const Projects: Project[] = [
       "Flujo de reportes de mantenimiento",
       "Asignación y reasignación de bienes",
       "Generación de PDFs institucionales",
-      "Endpoints API internos para DataTables",
     ],
 
     challenges: [
       "Diseño de control de acceso granular por rol y acción",
       "Implementación de trazabilidad histórica sin degradar rendimiento",
-      "Configuración de servidor Linux para múltiples versiones de PHP",
       "Implementación de entorno de desarrollo reproducible basado en Laravel Sail",
     ],
 
@@ -152,11 +152,11 @@ export const Projects: Project[] = [
     githubUrl: "https://github.com/D-Amores/siape-gob",
 
     tags: ["Government", "Role-Based System", "Fullstack"],
-    mainImage: `${kananBase}/dashboard.png`,
+    mainImage: `${kananBase}/dashboard.webp`,
     images: kananImages,
   },
   {
-    id: 2,
+    id: "griot",
     title: "Griot",
 
     // Contextual information
@@ -228,7 +228,7 @@ export const Projects: Project[] = [
     tags: ["Education", "Language Learning", "Vocabulary", "Multilingual"],
   },
   {
-    id: 3, // O el número que corresponda
+    id: "tesloshop",
     title: "TesloShop",
 
     // Contextual information
@@ -307,7 +307,7 @@ export const Projects: Project[] = [
     tags: ["E-commerce", "React", "TypeScript", "TailwindCSS"],
   },
   {
-    id: 4, // or your preferred ID
+    id: "siop", // or your preferred ID
     title: "SIOP",
 
     // Contextual information

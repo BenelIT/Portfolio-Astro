@@ -106,13 +106,18 @@ function Lightbox({
           rounded-2xl overflow-hidden ring-1 ring-white/20 shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
-        <img
-          key={current}
-          src={images[current]}
-          alt={`Screenshot ${current + 1}`}
-          className="w-full h-full object-contain"
-          style={{ maxHeight: "85vh" }}
-        />
+        <picture key={current}>
+          <source srcSet={images[current]} type="image/webp" />
+          <img
+            src={images[current]}
+            alt={`Screenshot ${current + 1}`}
+            className="w-full h-full object-contain"
+            style={{ maxHeight: "85vh", imageRendering: "crisp-edges" }}
+            loading="eager"
+            decoding="async"
+            fetchPriority="high"
+          />
+        </picture>
       </div>
 
       {/* Next */}
@@ -165,8 +170,25 @@ export const ProjectDetailPage = ({ project }: ProjectDetailPageProps) => {
                border border-white/30 shadow-2xl ring-1 ring-white/40"
           >
             <div>
-              <div className="text-sm text-neutral-800 mb-3">
-                {project.role} · {project.year}
+              <div className="flex items-center gap-2 mb-3 text-sm text-neutral-800">
+                <span>
+                  {project.role} · {project.year}
+                </span>
+                <span
+                  className={`px-2 py-0.5 rounded-full text-xs font-medium ${
+                    project.status === "completed"
+                      ? "bg-emerald-100 text-emerald-700"
+                      : project.status === "in-progress"
+                        ? "bg-amber-100 text-amber-700"
+                        : "bg-neutral-100 text-neutral-600"
+                  }`}
+                >
+                  {project.status === "completed"
+                    ? "Completado"
+                    : project.status === "in-progress"
+                      ? "En progreso"
+                      : project.status}
+                </span>
               </div>
 
               <h1 className="text-4xl md:text-5xl font-semibold tracking-tight leading-[1.1]">
@@ -179,10 +201,17 @@ export const ProjectDetailPage = ({ project }: ProjectDetailPageProps) => {
             </div>
 
             {project.images?.[0] && (
-              <img
-                src={project.images[0]}
-                className="rounded-2xl border border-white/40 shadow-2xl"
-              />
+              <picture>
+                <source srcSet={project.images[0]} type="image/webp" />
+                <img
+                  src={project.images[0]}
+                  alt="Project preview"
+                  className="rounded-2xl border border-white/40 shadow-2xl w-full h-auto"
+                  loading="lazy"
+                  decoding="async"
+                  style={{ imageRendering: "crisp-edges" }}
+                />
+              </picture>
             )}
           </div>
         </section>
@@ -225,7 +254,9 @@ export const ProjectDetailPage = ({ project }: ProjectDetailPageProps) => {
                   <p className="text-sm text-neutral-800 font-medium">
                     {project.teamSize}{" "}
                     <span className="font-normal text-neutral-600">
-                      {project.teamSize === 1 ? "developer" : "developers"}
+                      {project.teamSize === 1
+                        ? "desarrollador"
+                        : "desarrolladores"}
                     </span>
                   </p>
                 </div>
@@ -447,15 +478,22 @@ export const ProjectDetailPage = ({ project }: ProjectDetailPageProps) => {
                   key={i}
                   onClick={() => setLightboxIndex(i)}
                   className="group relative rounded-2xl p-3 cursor-zoom-in
-                    backdrop-blur-lg bg-white/15
+                    bg-white/10 backdrop-blur-sm
                     border border-white/30 ring-1 ring-white/30
                     shadow-2xl transition-transform hover:scale-[1.015]"
                 >
-                  <img
-                    src={img}
-                    alt={`Screenshot ${i + 1}`}
-                    className="rounded-xl w-full object-cover"
-                  />
+                  <picture>
+                    <source srcSet={img} type="image/webp" />
+                    <img
+                      src={img}
+                      alt={`Screenshot ${i + 1}`}
+                      loading={i === 0 ? "eager" : "lazy"}
+                      decoding="async"
+                      fetchPriority={i === 0 ? "high" : "auto"}
+                      className="w-full h-full rounded-xl object-contain"
+                      style={{ imageRendering: "crisp-edges" }}
+                    />
+                  </picture>
                   {/* Hover overlay */}
                   <div
                     className="absolute inset-3 rounded-xl flex items-center justify-center
