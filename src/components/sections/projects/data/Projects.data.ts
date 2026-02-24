@@ -1,6 +1,6 @@
 import type { Project } from "../types/Project.type";
 
-const kananBase = "/src/assets/projects/kanan";
+const kananBase = "/projects/kanan";
 const kananImages = [
   "dashboard",
   "dashboard",
@@ -27,7 +27,7 @@ const kananImages = [
   "reportsDetails",
 ].map((name) => `${kananBase}/${name}.webp`);
 
-const griotBase = "/src/assets/projects/griot";
+const griotBase = "/projects/griot";
 const griotImages = [
   "lenguagesDashboard",
   "lenguagesDashboard",
@@ -52,7 +52,7 @@ const griotImages = [
   "speedRoundStart",
 ].map((name) => `${griotBase}/${name}.webp`);
 
-const tesloBase = "/src/assets/projects/tesloshop";
+const tesloBase = "/projects/tesloshop";
 const tesloImages = [
   "dashboard",
   "dashboard",
@@ -63,7 +63,7 @@ const tesloImages = [
   "adminProduct2",
 ].map((name) => `${tesloBase}/${name}.webp`);
 
-const siopBase = "/src/assets/projects/siop";
+const siopBase = "/projects/siop";
 const siopImages = [
   "Main",
   "Main",
