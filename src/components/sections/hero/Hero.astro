@@ -1,5 +1,6 @@
 ---
 import { Button } from "@/components/ui/button";
+import { scrollToSection } from "@/utils/scrollToSection";
 import { ArrowRight, Layers } from "lucide-react";
 ---
 
@@ -46,9 +47,9 @@ import { ArrowRight, Layers } from "lucide-react";
       </p>
       {/* CTA Section */}
       <div class="mt-5 sm:mt-6 md:mt-7 lg:mt-8">
-        <!-- TODO: Scroll down to the section -->
         <Button
           size="lg"
+          id="explore-btn"
           className="bg-blue-600 hover:bg-blue-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 w-full sm:w-auto "
         >
           Explora mi trabajo
@@ -108,3 +109,10 @@ import { ArrowRight, Layers } from "lucide-react";
     </div>
   </div>
 </section>
+
+<script>
+  import { scrollToSection } from "@/utils/scrollToSection";
+  document.getElementById("explore-btn")?.addEventListener("click", () => {
+    scrollToSection("#projects");
+  });
+</script>
