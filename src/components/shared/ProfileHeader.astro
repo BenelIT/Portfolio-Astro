@@ -1,6 +1,7 @@
 ---
 import { MapPin } from "lucide-react";
 import SocialLinks from "./SocialLinks.astro";
+import img1 from "@/assets/about-me/img1.jpeg";
 ---
 
 <div class="flex h-40 gap-4">
@@ -13,7 +14,7 @@ import SocialLinks from "./SocialLinks.astro";
         class="rounded-full overflow-hidden w-24 h-24 sm:w-32 sm:h-32 md:w-35 md:h-35 bg-white"
       >
         <img
-          src="/src/assets/about-me/img1.JPEG"
+          src={img1.src}
           alt="Cristobal"
           class="w-full h-full object-cover object-top"
         />
