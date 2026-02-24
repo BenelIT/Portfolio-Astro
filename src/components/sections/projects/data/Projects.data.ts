@@ -67,39 +67,41 @@ const siopBase = "/src/assets/projects/siop";
 const siopImages = [
   "Main",
   "Main",
-  "Accion2",
-  "acta",
-  "Accion3",
-  "agregarProyecto2",
-  "Contratos2",
-  "Contratos7",
-  "obreBianual",
-  "SEINFRAC12",
-  "SEINFRAC3",
-  "SEINFRAC8",
-  "Accion4",
-  "agregarProyecto",
-  "Contratos3",
-  "Contratos8",
-  "peticiones",
-  "SEINFRAC13",
-  "SEINFRAC4",
-  "SEINFRAC9",
   "Accion",
-  "AsignarSupervisores2",
-  "Contratos4",
-  "Contratos9",
-  "proyectoDashboard",
-  "SEINFRAC14",
-  "SEINFRAC5",
-  "SEINFRAC",
+  "Accion2",
+  "Accion3",
+  "Accion4",
+  "acta",
   "acta2",
+  "agregarProyecto",
+  "agregarProyecto2",
+  "AsignarSupervisores",
+  "AsignarSupervisores2",
   "AsignarSupervisores3",
-  "Contratos5",
   "Contratos",
+  "Contratos2",
+  "Contratos4",
+  "Contratos5",
+  "Contratos7",
+  "Contratos8",
+  "Contratos9",
+  "obreBianual",
+  "peticiones",
+  "proyectoDashboard",
+  "SEINFRAC",
+  "SEINFRAC2",
+  "SEINFRAC3",
+  "SEINFRAC4",
+  "SEINFRAC5",
+  "SEINFRAC7",
+  "SEINFRAC8",
+  "SEINFRAC9",
   "SEINFRAC10",
+  "SEINFRAC11",
+  "SEINFRAC12",
+  "SEINFRAC13",
+  "SEINFRAC14",
   "SEINFRAC15",
-  "SEINFRAC6",
 ].map((name) => `${siopBase}/${name}.webp`);
 
 export const Projects: Project[] = [
@@ -162,7 +164,7 @@ export const Projects: Project[] = [
     // Contextual information
     year: 2026,
     status: "in-progress",
-    role: "Frontend Developer",
+    role: "Desarrollador Frontend",
     teamSize: 1,
 
     // Detailed information
@@ -173,13 +175,13 @@ export const Projects: Project[] = [
       "Los estudiantes de idiomas necesitan una forma atractiva y efectiva de practicar y retener vocabulario en múltiples idiomas. Los métodos tradicionales de memorización son poco motivantes y carecen de gamificación que mantenga el interés a largo plazo.",
 
     solution:
-      "Griot ofrece 5 juegos interactivos (Ahorcado, Opción Múltiple, Memorama, Scramble y Ronda Rápida) donde los usuarios pueden practicar vocabulario en 10+ idiomas. Los usuarios gestionan su propio diccionario personalizado con traducciones múltiples y etiquetas organizativas, mientras el sistema rastrea estadísticas de progreso.",
+      "Griot ofrece 5 juegos interactivos (Ahorcado, Opción Múltiple, Memorama, Scramble y Ronda Rápida) donde los usuarios pueden practicar vocabulario en distintos idiomas. Los usuarios gestionan su propio diccionario personalizado con traducciones múltiples y etiquetas organizativas, mientras el sistema rastrea estadísticas de progreso.",
 
     impact:
       "Plataforma diseñada como MVP escalable que permite a estudiantes de idiomas practicar vocabulario de forma divertida y personalizada. El sistema de múltiples traducciones facilita el aprendizaje simultáneo de varios idiomas.",
 
     methodology:
-      "Desarrollo incremental con enfoque en MVP, utilizando feedback de usuarios para iterar en características y mejorar la experiencia de aprendizaje.",
+      "Desarrollo incremental con enfoque en MVP, buscando mejorar la experiencia de aprendizaje.",
     // Technical details
     stack: [
       "Next.js",
@@ -190,32 +192,28 @@ export const Projects: Project[] = [
     ],
 
     architecture:
-      "Next.js App Router con arquitectura cliente-servidor. Utiliza route grouping para organizar secciones (auth), (word). Sistema de almacenamiento local para persistencia de datos. Componentes reutilizables con diseño atómico (UI components, features, layouts).",
+      "Next.js App Router con arquitectura cliente-servidor. Utiliza route grouping para organizar secciones. Sistema de almacenamiento local para persistencia de datos. Componentes reutilizables con diseño atómico (UI components, features, layouts).",
 
     keyFeatures: [
-      "Gestión de vocabulario multilingüe",
-      "5 juegos interactivos con diferentes niveles de dificultad (fácil, medio, difícil)",
-      "Sistema de estadísticas y visualización de progreso con gráficos",
+      "Gestión de diccionario personalizado",
+      "5 juegos interactivos con diferentes niveles de dificultad",
+      "Sistema de estadísticas y visualización de progreso",
       "Interfaz totalmente responsive con diseño mobile-first",
       "Sistema de etiquetas para organización de palabras",
-      "Selector de idiomas con banderas de países",
-      "Almacenamiento persistente en navegador",
-      "Tema visual personalizado 'Griot' con paleta de colores warm (cream, teal, sand)",
+      "Soporte para múltiples traducciones por palabra",
     ],
 
     challenges: [
-      "Implementar lógica de juegos que funcione correctamente con múltiples idiomas y sistemas de escritura diferentes",
+      "Compatibilidad de lógica de juegos con caracteres especiales y acentos de distintos idiomas.",
+      "Estructurar el App Router para que cada juego sea independiente pero comparta la misma fuente de datos.",
       "Crear una interfaz responsive que funcione tanto en móvil como desktop manteniendo la experiencia de usuario",
-      "Persistencia de datos usando localStorage sin backend",
     ],
 
     decisions: [
       "Uso de Next.js App Router para mejor estructura de rutas y layouts anidados",
       "Tipado completo con TypeScript para interfaces de Word, Translation, Game",
-      "LocalStorage para MVP sin requerir backend inicialmente",
       "shadcn/ui para componentes UI consistentes y accesibles",
-      "Separación clara entre lógica de juegos individuales (cada juego en su propia página)",
-      "Fuentes personalizadas: Lora (serif) para títulos, Nunito Sans (sans-serif) para cuerpo",
+      "Separación clara entre lógica de juegos individuales",
     ],
 
     // Links and media
@@ -241,7 +239,7 @@ export const Projects: Project[] = [
       "Plataforma de e-commerce moderna con panel de administración completo para la gestión de productos de una tienda de ropa",
 
     problem:
-      "Simulación de un entorno e-commerce real que requiere separación clara entre experiencia de cliente y panel administrativo, con autenticación basada en roles y manejo eficiente de estado asíncrono.",
+      "Las tiendas en línea necesitan separar claramente la experiencia del cliente de las herramientas administrativas, con accesos diferenciados y datos siempre sincronizados entre ambos contextos.",
 
     solution:
       "Desarrollo de SPA modular con separación por dominios (shop, admin, auth), implementando state isolation (Zustand) y server state management con TanStack Query. Sincronización de filtros con URL params para mantener estado navegable y compartible.",
@@ -253,9 +251,7 @@ export const Projects: Project[] = [
     stack: [
       "React",
       "TypeScript",
-      "Vite",
       "React Router",
-      "TailwindCSS",
       "Zustand",
       "TanStack Query",
       "Axios",
@@ -264,14 +260,17 @@ export const Projects: Project[] = [
       "Sonner",
     ],
 
+    teamSize: 1,
+
+    methodology:
+      "Proyecto personal nacido de la curiosidad. Sin metodología formal, cada feature surgió de experimentar, romper cosas y aprender del proceso.",
+
     architecture:
       "Arquitectura modular en capas: features separados (shop/admin/auth), cada uno con su propia estructura de pages, layouts, components, actions, hooks y stores. Lazy loading en rutas de admin y auth. Protected routes basadas en roles",
 
     keyFeatures: [
       "Sistema de autenticación con JWT y gestión de roles (admin/user)",
       "Catálogo de productos con filtros avanzados (género, talla, precio)",
-      "Panel administrativo con dashboard de métricas",
-      "CRUD completo de productos con gestión de imágenes drag & drop",
       "Paginación y navegación optimizada con URL params",
       "Sistema de tags dinámicos para productos",
       "Protección de rutas según autenticación y roles",
@@ -330,20 +329,18 @@ export const Projects: Project[] = [
 
     // Technical details
     stack: [
-      "C#",
       "ASP.NET Web Forms",
       "ASP.NET Web API",
       ".NET Framework 4.7.2",
       "SQL Server",
+      "C#",
       "Dapper",
-      "OWIN",
       "JavaScript",
-      "HTML/CSS",
       "Bootstrap",
     ],
 
     architecture:
-      "Arquitectura en capas con separación entre presentación (Web Forms), API REST para integración externa y acceso a datos optimizado con Dapper sobre SQL Server. Autenticación implementada con OWIN.",
+      "Arquitectura en capas con separación entre presentación (Web Forms), API REST para integración externa y acceso a datos optimizado con Dapper sobre SQL Server.",
 
     keyFeatures: [
       "Gestión de solicitudes COPLADE por sector, subcomité y municipio",
@@ -358,7 +355,7 @@ export const Projects: Project[] = [
     ],
 
     challenges: [
-      "Integración de múltiples módulos interdependientes (COPLADE → Anteproyectos → Contratos → Estimaciones → Pagos)",
+      "Integración de múltiples módulos interdependientes (COPLADE → Anteproyectos → Contratos → Estimaciones → Pagos → etc )",
       "Gestión de grandes volúmenes de datos con búsqueda y filtrado eficiente",
       "Manejo de contratos bianuales y obras sin relación directa",
       "Implementación de API RESTful junto con Web Forms tradicional",
@@ -368,10 +365,12 @@ export const Projects: Project[] = [
       "Uso de Dapper para acceso a datos por su rendimiento en consultas complejas",
       "OWIN para middleware y redirección inicial",
       "Separación de Controllers para API y Code-behind para Web Forms",
-      "Nomenclatura en español por requisitos del cliente gubernamental",
+      "Nomenclatura en español por requisitos gubernamentales",
     ],
-    teamSize: 3,
+    teamSize: 2,
     methodology: "Desarrollo incremental con entregas por módulo",
+    warning:
+      "Demo disponible con datos de prueba. El acceso a la base de datos de producción no está disponible por políticas del cliente, por lo que algunas vistas pueden aparecer sin datos.",
 
     // Links and media
     liveUrl: undefined, // Add if deployed

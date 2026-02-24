@@ -21,6 +21,7 @@ import {
   ChevronLeft,
   ChevronRight,
   ZoomIn,
+  TriangleAlert,
 } from "lucide-react";
 import type { Project } from "../types/Project.type";
 import { Button } from "@/components/ui/button";
@@ -248,7 +249,7 @@ export const ProjectDetailPage = ({ project }: ProjectDetailPageProps) => {
                   <div className="flex items-center gap-2 mb-3">
                     <Users size={14} className="text-neutral-600" />
                     <h3 className="text-xs uppercase tracking-widest text-neutral-600 font-medium">
-                      Team
+                      Equipo
                     </h3>
                   </div>
                   <p className="text-sm text-neutral-800 font-medium">
@@ -268,7 +269,7 @@ export const ProjectDetailPage = ({ project }: ProjectDetailPageProps) => {
                   <div className="flex items-center gap-2 mb-3">
                     <GitBranch size={14} className="text-neutral-600" />
                     <h3 className="text-xs uppercase tracking-widest text-neutral-600 font-medium">
-                      Methodology
+                      Metodología
                     </h3>
                   </div>
                   <p className="text-sm text-neutral-800">
@@ -283,7 +284,7 @@ export const ProjectDetailPage = ({ project }: ProjectDetailPageProps) => {
                   <div className="flex items-center gap-2 mb-3">
                     <ExternalLink size={14} className="text-neutral-500" />
                     <h3 className="text-xs uppercase tracking-widest text-neutral-500 font-medium">
-                      Repository
+                      Repositorio
                     </h3>
                   </div>
                   <a
@@ -292,7 +293,7 @@ export const ProjectDetailPage = ({ project }: ProjectDetailPageProps) => {
                     rel="noopener noreferrer"
                     className="text-sm text-neutral-900 underline underline-offset-2 hover:text-neutral-600 transition-colors flex items-center gap-1"
                   >
-                    View on GitHub
+                    Ver en GitHub
                     <ExternalLink size={11} />
                   </a>
                 </div>
@@ -301,12 +302,12 @@ export const ProjectDetailPage = ({ project }: ProjectDetailPageProps) => {
                   <div className="flex items-center gap-2 mb-3">
                     <Lock size={14} className="text-neutral-500" />
                     <h3 className="text-xs uppercase tracking-widest text-neutral-500 font-medium">
-                      Repository
+                      Repositorio
                     </h3>
                   </div>
                   <p className="text-sm text-neutral-600 flex items-center gap-1.5">
                     <Lock size={12} className="shrink-0" />
-                    Private — government project
+                    Privado — Proyecto Gubernamental
                   </p>
                 </div>
               ) : null}
@@ -458,6 +459,15 @@ export const ProjectDetailPage = ({ project }: ProjectDetailPageProps) => {
             </div>
           )}
         </section>
+
+        {project.warning && (
+          <div className="max-w-7xl mx-auto pb-6">
+            <div className="flex items-start gap-3 rounded-xl border border-white/30 bg-white/15 backdrop-blur-xl px-4 py-3 text-amber-600 text-sm">
+              <TriangleAlert size={16} className="shrink-0 mt-0.5" />
+              <p>{project.warning}</p>
+            </div>
+          </div>
+        )}
 
         {/* GALLERY */}
         {galleryImages.length > 0 && (

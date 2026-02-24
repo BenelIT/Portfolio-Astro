@@ -6,6 +6,7 @@ export interface Project {
   year: number | string;
   status: "completed" | "in-progress" | "maintained";
   role: string;
+  warning?: string;
 
   // Detailed information
   shortDescription: string;
