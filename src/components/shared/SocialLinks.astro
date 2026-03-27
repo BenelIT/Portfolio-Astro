@@ -1,5 +1,25 @@
 ---
 import { Mail, Linkedin, Github } from "lucide-react";
+import { normalizeLocale } from "@/i18n/config";
+import type { Locale } from "@/i18n/types";
+
+interface Props {
+  locale?: Locale;
+}
+
+const locale = normalizeLocale(Astro.props.locale);
+const t =
+  locale === "es"
+    ? {
+        githubAria: "Perfil de GitHub",
+        linkedinAria: "Perfil de LinkedIn",
+        emailAria: "Enviar correo",
+      }
+    : {
+        githubAria: "GitHub profile",
+        linkedinAria: "LinkedIn profile",
+        emailAria: "Send email",
+      };
 ---
 
 <div class="flex gap-3 pt-1">
@@ -7,7 +27,7 @@ import { Mail, Linkedin, Github } from "lucide-react";
     href="https://github.com/BenelIT"
     target="_blank"
     rel="noopener noreferrer"
-    aria-label="GitHub profile"
+    aria-label={t.githubAria}
     class="transition-transform hover:scale-110"
   >
     <Github className="w-5 h-5" />
@@ -16,14 +36,14 @@ import { Mail, Linkedin, Github } from "lucide-react";
     href="https://www.linkedin.com/in/cristobalcoronelchambe/"
     target="_blank"
     rel="noopener noreferrer"
-    aria-label="LinkedIn profile"
+    aria-label={t.linkedinAria}
     class="transition-transform hover:scale-110 text-blue-600"
   >
     <Linkedin className="w-5 h-5" />
   </a>
   <a
     href="mailto:cristobal.coronelchambe@outlook.com"
-    aria-label="Send email"
+    aria-label={t.emailAria}
     class="transition-transform hover:scale-110"
   >
     <Mail className="w-5 h-5" />

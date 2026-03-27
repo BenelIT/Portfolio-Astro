@@ -5,6 +5,40 @@ import AboutCTA from "./components/AboutCTA.astro";
 import { backendTechStack, frontendTechStack } from "./data/techStackData";
 import ProfileHeader from "@/components/shared/ProfileHeader.astro";
 import { TechStackCarousel } from "./components/TechStackCarousel";
+import { normalizeLocale } from "@/i18n/config";
+import type { Locale } from "@/i18n/types";
+
+interface Props {
+  locale?: Locale;
+}
+
+const locale = normalizeLocale(Astro.props.locale);
+const t =
+  locale === "es"
+    ? {
+        title: "Sobre mí",
+        paragraph1:
+          "Me importa mucho cómo se lee el código, no solo cómo funciona. Como valoro el trabajo en equipo, prefiero escribir código claro y mantenible que otros puedan entender fácilmente, incluso si eso significa priorizar la legibilidad en lugar de ahorrar unas cuantas líneas.",
+        paragraph2:
+          "Trabajo en todo el stack, pero me atrae especialmente el frontend porque es donde el usuario siente el producto. Disfruto pensar en los flujos y en los pequeños detalles que hacen que las cosas sean más fáciles y naturales para quienes usan lo que construimos.",
+        reliability: "Confiabilidad",
+        longTermThinking: "Pensamiento a largo plazo",
+        userCentered: "Enfoque centrado en el usuario",
+        backendTools: "Backend y herramientas",
+        frontend: "Frontend",
+      }
+    : {
+        title: "About me",
+        paragraph1:
+          "I care deeply about how code is read, not just how it runs. Since I value teamwork, I prefer writing clear and maintainable code that others can easily understand, even if that means prioritizing readability over saving a few lines.",
+        paragraph2:
+          "I work across the full stack, but I am especially drawn to frontend work because that is where users feel the product. I enjoy thinking through flows and small details that make experiences easier and more natural for people using what we build.",
+        reliability: "Reliability",
+        longTermThinking: "Long-term thinking",
+        userCentered: "User-centered focus",
+        backendTools: "Backend and tooling",
+        frontend: "Frontend",
+      };
 ---
 
 <section
@@ -19,10 +53,10 @@ import { TechStackCarousel } from "./components/TechStackCarousel";
     {/* Left Content */}
     <div class="w-full lg:w-auto lg:shrink-0">
       {/* Top content */}
-      <ProfileHeader />
+      <ProfileHeader locale={locale} />
 
       {/* CTA */}
-      <AboutCTA />
+      <AboutCTA locale={locale} />
     </div>
 
     {/* Right Content */}
@@ -35,24 +69,17 @@ import { TechStackCarousel } from "./components/TechStackCarousel";
         <div class="flex items-center gap-2">
           <Code2 className="w-5 h-5 text-blue-600 shrink-0" />
           <h3 class="text-lg md:text-xl font-bold text-neutral-900">
-            Sobre mí
+            {t.title}
           </h3>
         </div>
 
         {/* Paragraphs */}
         <p class="text-sm md:text-base text-neutral-700 leading-relaxed">
-          Me importa mucho cómo se lee el código, no solo cómo funciona. Como
-          valoro el trabajo en equipo, prefiero escribir código claro y
-          mantenible que otros puedan entender fácilmente, incluso si eso
-          significa priorizar la legibilidad en lugar de ahorrar unas cuantas
-          líneas.
+          {t.paragraph1}
         </p>
 
         <p class="text-sm md:text-base text-neutral-700 leading-relaxed">
-          Trabajo en todo el stack, pero me atrae especialmente el frontend
-          porque es donde el usuario siente el producto. Disfruto pensar en los
-          flujos y en los pequeños detalles que hacen que las cosas sean más
-          fáciles y naturales para quienes usan lo que construimos.
+          {t.paragraph2}
         </p>
       </div>
 
@@ -62,21 +89,21 @@ import { TechStackCarousel } from "./components/TechStackCarousel";
           class="flex items-center gap-2 text-xs md:text-sm font-medium text-neutral-800"
         >
           <ShieldCheck className="w-4 h-4 text-blue-600 shrink-0" />
-          <span class="whitespace-nowrap">Confiabilidad</span>
+          <span class="whitespace-nowrap">{t.reliability}</span>
         </div>
 
         <div
           class="flex items-center gap-2 text-xs md:text-sm font-medium text-neutral-800"
         >
           <Layers className="w-4 h-4 text-blue-600 shrink-0" />
-          <span class="whitespace-nowrap">Pensamiento a largo plazo</span>
+          <span class="whitespace-nowrap">{t.longTermThinking}</span>
         </div>
 
         <div
           class="flex items-center gap-2 text-xs md:text-sm font-medium text-neutral-800"
         >
           <UserCheck className="w-4 h-4 text-blue-600 shrink-0" />
-          <span class="whitespace-nowrap">Enfoque centrado en el usuario</span>
+          <span class="whitespace-nowrap">{t.userCentered}</span>
         </div>
       </div>
     </div>
@@ -90,7 +117,7 @@ import { TechStackCarousel } from "./components/TechStackCarousel";
       <TechStackCarousel
         client:visible
         techStack={backendTechStack}
-        title="Backend y herramientas"
+        title={t.backendTools}
         iconName="layers"
       />
     </div>
@@ -100,7 +127,7 @@ import { TechStackCarousel } from "./components/TechStackCarousel";
       <TechStackCarousel
         client:visible
         techStack={frontendTechStack}
-        title="Frontend"
+        title={t.frontend}
         iconName="monitor"
       />
     </div>

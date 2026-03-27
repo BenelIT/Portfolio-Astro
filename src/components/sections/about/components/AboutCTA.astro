@@ -2,8 +2,28 @@
 import { Button } from "@/components/ui/moving-border";
 import { Button as ShadcnButton } from "@/components/ui/button";
 import { ArrowRight, Download } from "lucide-react";
-import cv from "@/assets/about-me/CV_Cristobal_Coronel_Chambe.pdf";
+import cvEs from "@/assets/about-me/CV_Cristobal_Coronel_Chambe.pdf";
+import cvEn from "@/assets/about-me/CV_Cristobal_Coronel_English.pdf";
 import { scrollToSection } from "@/utils/scrollToSection";
+import { normalizeLocale } from "@/i18n/config";
+import type { Locale } from "@/i18n/types";
+
+interface Props {
+  locale?: Locale;
+}
+
+const locale = normalizeLocale(Astro.props.locale);
+const cv = locale === "en" ? cvEn : cvEs;
+const t =
+  locale === "es"
+    ? {
+        viewProjects: "Ver proyectos",
+        downloadCv: "Descargar CV",
+      }
+    : {
+        viewProjects: "View projects",
+        downloadCv: "Download resume",
+      };
 ---
 
 <div
@@ -17,7 +37,7 @@ import { scrollToSection } from "@/utils/scrollToSection";
     className="bg-white/40 backdrop-blur-xl border-white/60 text-blue-950 font-bold hover:bg-white/50 hover:shadow-2xl hover:shadow-blue-400/40 transition-all duration-300 hover:scale-[1.02] w-full md:w-auto"
   >
     <span class="flex items-center justify-center gap-2 group px-4">
-      Ver proyectos
+      {t.viewProjects}
       <ArrowRight
         className="h-4 w-4 group-hover:translate-x-1 transition-transform"
       />
@@ -38,7 +58,7 @@ import { scrollToSection } from "@/utils/scrollToSection";
       <Download
         className="mr-2 h-4 w-4 group-hover:translate-y-0.5 transition-transform"
       />
-      Descargar CV
+      {t.downloadCv}
     </ShadcnButton>
   </a>
 

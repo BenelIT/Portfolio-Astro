@@ -1,12 +1,19 @@
 // ProjectsCard.tsx
 import { ExternalLink, Github } from "lucide-react";
 import type { Project } from "../types/Project.type";
+import type { Locale } from "@/i18n/types";
 
 interface Props {
   project: Project;
+  locale: Locale;
 }
 
-export const ProjectsCard = ({ project }: Props) => {
+export const ProjectsCard = ({ project, locale }: Props) => {
+  const t =
+    locale === "es" ? { viewMore: "Ver más" } : { viewMore: "View more" };
+  const detailPath =
+    locale === "en" ? `/en/projects/${project.id}` : `/projects/${project.id}`;
+
   return (
     <div
       className="bg-white/40 border border-white/50 rounded-3xl p-6 w-full h-full flex flex-col duration-300 ease-out 
@@ -39,12 +46,12 @@ export const ProjectsCard = ({ project }: Props) => {
       </div>
       <div className="flex gap-3">
         <a
-          href={`/projects/${project.id}`}
+          href={detailPath}
           rel="noopener noreferrer"
           className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-blue-600 hover:bg-blue-800 text-white rounded-xl font-semibold transition-colors duration-200 group/btn text-sm"
           onClick={(e) => e.stopPropagation()}
         >
-          <span>Ver más</span>
+          <span>{t.viewMore}</span>
           <ExternalLink className="w-4 h-4 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform duration-200" />
         </a>
         {project.githubUrl && (

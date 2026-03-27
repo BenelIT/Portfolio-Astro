@@ -1,6 +1,44 @@
 ---
 import { Mail, MapPin, Phone, Github, Linkedin } from "lucide-react";
 import img1 from "@/assets/about-me/img1.jpeg";
+import { normalizeLocale } from "@/i18n/config";
+import type { Locale } from "@/i18n/types";
+
+interface Props {
+  locale?: Locale;
+}
+
+const locale = normalizeLocale(Astro.props.locale);
+const t =
+  locale === "es"
+    ? {
+        heading: "Construyamos algo sólido",
+        role: "Desarrollador Full-Stack",
+        connect: "Conectemos",
+        connectDescription:
+          "No dudes en contactarme a través de cualquiera de los canales indicados. Siempre estoy abierto a hablar sobre nuevos proyectos, ideas creativas u oportunidades para formar parte de tu visión.",
+        contactInfo: "Información de contacto",
+        email: "Correo electrónico",
+        phone: "Teléfono",
+        githubAria: "Perfil de GitHub",
+        linkedinAria: "Perfil de LinkedIn",
+        copyEmail: "Correo electrónico copiado al portapapeles",
+        copyPhone: "Número de teléfono copiado al portapapeles",
+      }
+    : {
+        heading: "Let's build something solid",
+        role: "Full-Stack Developer",
+        connect: "Let's connect",
+        connectDescription:
+          "Feel free to contact me through any of the channels below. I am always open to discussing new projects, creative ideas, or opportunities to contribute to your vision.",
+        contactInfo: "Contact information",
+        email: "Email",
+        phone: "Phone",
+        githubAria: "GitHub profile",
+        linkedinAria: "LinkedIn profile",
+        copyEmail: "Email copied to clipboard",
+        copyPhone: "Phone number copied to clipboard",
+      };
 ---
 
 <section
@@ -11,7 +49,7 @@ import img1 from "@/assets/about-me/img1.jpeg";
     <h2
       class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-900"
     >
-      Construyamos algo sólido
+      {t.heading}
     </h2>
     <div
       class="h-1 sm:h-1.5 mt-2 w-74 sm:w-80 md:w-100 lg:w-158 bg-linear-to-r from-blue-600 to-cyan-500 rounded-full"
@@ -54,7 +92,7 @@ import img1 from "@/assets/about-me/img1.jpeg";
               Cristóbal Coronel
             </h3>
             <p class="text-blue-600 font-semibold mb-1 text-sm sm:text-base">
-              Desarrollador Full-Stack
+              {t.role}
             </p>
             <div class="flex items-center gap-1.5 text-sm text-neutral-600">
               <MapPin className="w-4 h-4 shrink-0" />
@@ -68,12 +106,10 @@ import img1 from "@/assets/about-me/img1.jpeg";
           class="bg-white/15 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-5 mt-3 border border-white/30"
         >
           <h4 class="text-base sm:text-lg font-semibold text-slate-800 mb-2">
-            Conectemos
+            {t.connect}
           </h4>
           <p class="text-slate-600 text-sm leading-relaxed">
-            No dudes en contactarme a través de cualquiera de los canales
-            indicados. Siempre estoy abierto a hablar sobre nuevos proyectos,
-            ideas creativas u oportunidades para formar parte de tu visión.
+            {t.connectDescription}
           </p>
         </div>
       </div>
@@ -81,7 +117,7 @@ import img1 from "@/assets/about-me/img1.jpeg";
       {/* Right Content - Contact Methods */}
       <div class="space-y-4">
         <h3 class="text-lg sm:text-xl font-bold text-slate-800 mb-4 sm:mb-5">
-          Información de Contacto
+          {t.contactInfo}
         </h3>
 
         {/* Contact Cards Grid */}
@@ -103,7 +139,7 @@ import img1 from "@/assets/about-me/img1.jpeg";
               <p
                 class="text-xs font-medium text-slate-500 uppercase tracking-wide mb-1"
               >
-                Correo electrónico
+                {t.email}
               </p>
               <p
                 class="text-slate-800 font-medium text-xs sm:text-sm break-all sm:wrap-break-word"
@@ -130,7 +166,7 @@ import img1 from "@/assets/about-me/img1.jpeg";
               <p
                 class="text-xs font-medium text-slate-500 uppercase tracking-wide mb-1"
               >
-                Teléfono
+                {t.phone}
               </p>
               <p class="text-slate-800 font-medium text-xs sm:text-sm">
                 +52 961 348 1926
@@ -143,7 +179,7 @@ import img1 from "@/assets/about-me/img1.jpeg";
             href="https://github.com/BenelIT"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="GitHub profile"
+            aria-label={t.githubAria}
             class="flex items-start gap-3 sm:gap-4 p-4 sm:p-5 rounded-xl bg-white/25 backdrop-blur-sm
             border border-white/40 hover:bg-white/35 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 cursor-pointer"
           >
@@ -170,7 +206,7 @@ import img1 from "@/assets/about-me/img1.jpeg";
             href="https://www.linkedin.com/in/cristobalcoronelchambe/"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="LinkedIn profile"
+            aria-label={t.linkedinAria}
             class="flex items-start gap-3 sm:gap-4 p-4 sm:p-5 rounded-xl bg-white/25 backdrop-blur-sm
             border border-white/40 hover:bg-white/35 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 cursor-pointer"
           >
@@ -198,7 +234,7 @@ import img1 from "@/assets/about-me/img1.jpeg";
   </div>
 </section>
 
-<script>
+<script define:vars={{ copyEmail: t.copyEmail, copyPhone: t.copyPhone }}>
   import { toast } from "sonner";
 
   // Email contact
@@ -208,7 +244,7 @@ import img1 from "@/assets/about-me/img1.jpeg";
       const email = emailContact.dataset.email;
       if (email) {
         navigator.clipboard.writeText(email);
-        toast.success("Correo electrónico copiado al portapapeles");
+        toast.success(copyEmail);
       }
     });
   }
@@ -220,7 +256,7 @@ import img1 from "@/assets/about-me/img1.jpeg";
       const phone = phoneContact.dataset.phone;
       if (phone) {
         navigator.clipboard.writeText(phone);
-        toast.success("Número de teléfono copiado al portapapeles");
+        toast.success(copyPhone);
       }
     });
   }

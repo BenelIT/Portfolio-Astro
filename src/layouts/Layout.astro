@@ -1,33 +1,35 @@
+---
+import { getDictionary } from "@/i18n/dictionary";
+import { normalizeLocale } from "@/i18n/config";
+import type { Locale } from "@/i18n/types";
+
+interface Props {
+  locale?: Locale;
+}
+
+const locale = normalizeLocale(Astro.props.locale);
+const dict = getDictionary(locale);
+const ogLocale = locale === "es" ? "es_ES" : "en_US";
+---
+
 <!doctype html>
-<html lang="en">
+<html lang={locale}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
 
-    <title>
-      Cristóbal Chambé — Desarrollador de software centrado en la claridad y la
-      arquitectura
-    </title>
+    <title>{dict.seo.title}</title>
 
-    <meta
-      name="description"
-      content="Construyo sistemas mantenibles, con arquitectura limpia y enfoque a largo plazo."
-    />
+    <meta name="description" content={dict.seo.description} />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://cristobalchambe.netlify.app/" />
 
-    <meta
-      property="og:title"
-      content="Cristóbal Chambé — Desarrollador de software centrado en la claridad y la arquitectura"
-    />
-    <meta property="og:locale" content="es_ES" />
-    <meta
-      property="og:description"
-      content="Construyo sistemas mantenibles, con arquitectura limpia y enfoque a largo plazo."
-    />
+    <meta property="og:title" content={dict.seo.title} />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:description" content={dict.seo.description} />
     <meta
       property="og:image"
       content="https://cristobalchambe.netlify.app/og.png"
@@ -35,14 +37,25 @@
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:creator" content="@BenelNY" />
-    <meta
-      name="twitter:title"
-      content="Cristóbal Chambé — Desarrollador de software centrado en la claridad y la arquitectura"
-    />
-    <meta
-      name="twitter:description"
-      content="Construyo sistemas mantenibles, con arquitectura limpia y enfoque a largo plazo."
-    />
+    <meta name="twitter:title" content={dict.seo.title} />
+    <meta name="twitter:description" content={dict.seo.description} />
+
+    <script is:inline>
+      (() => {
+        const preferred = window.localStorage.getItem("preferred-language");
+        const path = window.location.pathname;
+
+        if (preferred === "en" && !path.startsWith("/en")) {
+          window.location.replace(path === "/" ? "/en" : `/en${path}`);
+          return;
+        }
+
+        if (preferred === "es" && path.startsWith("/en")) {
+          const next = path === "/en" ? "/" : path.replace(/^\/en/, "");
+          window.location.replace(next || "/");
+        }
+      })();
+    </script>
   </head>
   <body>
     <slot />

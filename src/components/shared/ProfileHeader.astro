@@ -2,6 +2,22 @@
 import { MapPin } from "lucide-react";
 import SocialLinks from "./SocialLinks.astro";
 import img1 from "@/assets/about-me/img1.jpeg";
+import { normalizeLocale } from "@/i18n/config";
+import type { Locale } from "@/i18n/types";
+
+interface Props {
+  locale?: Locale;
+}
+
+const locale = normalizeLocale(Astro.props.locale);
+const t =
+  locale === "es"
+    ? {
+        role: "Desarrollador Full-Stack",
+      }
+    : {
+        role: "Full-Stack Developer",
+      };
 ---
 
 <div class="flex h-40 gap-4">
@@ -28,7 +44,7 @@ import img1 from "@/assets/about-me/img1.jpeg";
       Cristóbal Coronel
     </h3>
 
-    <p class="text-blue-600 font-semibold">Full-Stack Developer</p>
+    <p class="text-blue-600 font-semibold">{t.role}</p>
 
     {/* Location */}
     <div class="flex items-center gap-1 text-sm text-neutral-600">
@@ -37,6 +53,6 @@ import img1 from "@/assets/about-me/img1.jpeg";
     </div>
 
     {/* Social Links */}
-    <SocialLinks />
+    <SocialLinks locale={locale} />
   </div>
 </div>

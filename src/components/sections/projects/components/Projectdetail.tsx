@@ -25,20 +25,28 @@ import {
 } from "lucide-react";
 import type { Project } from "../types/Project.type";
 import { Button } from "@/components/ui/button";
+import type { Locale } from "@/i18n/types";
+import { LanguageSwitcher } from "@/components/shared/LanguageSwitcher";
 
 interface ProjectDetailPageProps {
   project: Project;
+  locale: Locale;
+  onBack: string;
+  switchToPath: string;
 }
 
-// ─── Lightbox ────────────────────────────────────────────────────────────────
 function Lightbox({
   images,
   startIndex,
   onClose,
+  screenshotLabel,
+  swipeHint,
 }: {
   images: string[];
   startIndex: number;
   onClose: () => void;
+  screenshotLabel: string;
+  swipeHint: string;
 }) {
   const [current, setCurrent] = useState(startIndex);
 
@@ -71,47 +79,38 @@ function Lightbox({
       onClick={onClose}
       style={{ background: "rgba(0,0,0,0.85)", backdropFilter: "blur(12px)" }}
     >
-      {/* Close */}
       <button
         onClick={onClose}
-        className="absolute top-4 right-4 z-10 rounded-full p-2
-          bg-white/10 border border-white/20 text-white
-          hover:bg-white/25 transition-colors cursor-pointer"
+        className="absolute top-4 right-4 z-10 rounded-full p-2 bg-white/10 border border-white/20 text-white hover:bg-white/25 transition-colors cursor-pointer"
       >
         <X size={20} />
       </button>
 
-      {/* Counter */}
       <span className="absolute top-5 left-1/2 -translate-x-1/2 text-white/60 text-sm font-medium tabular-nums">
         {current + 1} / {images.length}
       </span>
 
-      {/* Prev */}
       {images.length > 1 && (
         <button
           onClick={(e) => {
             e.stopPropagation();
             prev();
           }}
-          className="absolute left-2 sm:left-4 z-10 rounded-full p-2 sm:p-3
-            bg-white/10 border border-white/20 text-white
-            hover:bg-white/25 transition-colors cursor-pointer"
+          className="absolute left-2 sm:left-4 z-10 rounded-full p-2 sm:p-3 bg-white/10 border border-white/20 text-white hover:bg-white/25 transition-colors cursor-pointer"
         >
           <ChevronLeft size={20} />
         </button>
       )}
 
-      {/* Image */}
       <div
-        className="relative w-full mx-8 sm:mx-16 max-w-5xl
-          rounded-xl sm:rounded-2xl overflow-hidden ring-1 ring-white/20 shadow-2xl"
+        className="relative w-full mx-8 sm:mx-16 max-w-5xl rounded-xl sm:rounded-2xl overflow-hidden ring-1 ring-white/20 shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         <picture key={current}>
           <source srcSet={images[current]} type="image/webp" />
           <img
             src={images[current]}
-            alt={`Screenshot ${current + 1}`}
+            alt={`${screenshotLabel} ${current + 1}`}
             className="w-full h-full object-contain"
             style={{
               maxHeight: "80vh",
@@ -124,60 +123,101 @@ function Lightbox({
         </picture>
       </div>
 
-      {/* Next */}
       {images.length > 1 && (
         <button
           onClick={(e) => {
             e.stopPropagation();
             next();
           }}
-          className="absolute right-2 sm:right-4 z-10 rounded-full p-2 sm:p-3
-            bg-white/10 border border-white/20 text-white
-            hover:bg-white/25 transition-colors cursor-pointer"
+          className="absolute right-2 sm:right-4 z-10 rounded-full p-2 sm:p-3 bg-white/10 border border-white/20 text-white hover:bg-white/25 transition-colors cursor-pointer"
         >
           <ChevronRight size={20} />
         </button>
       )}
 
-      {/* Mobile swipe hint */}
       <p className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/30 text-xs sm:hidden">
-        Desliza los botones para navegar
+        {swipeHint}
       </p>
     </div>
   );
 }
 
-// ─── Page ─────────────────────────────────────────────────────────────────────
-export const ProjectDetailPage = ({ project }: ProjectDetailPageProps) => {
+export const ProjectDetailPage = ({
+  project,
+  locale,
+  onBack,
+  switchToPath,
+}: ProjectDetailPageProps) => {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const galleryImages = project.images?.slice(1) ?? [];
+
+  const t =
+    locale === "es"
+      ? {
+          swipeHint: "Usa los botones para navegar",
+          back: "Volver",
+          statusCompleted: "Completado",
+          statusInProgress: "En progreso",
+          team: "Equipo",
+          developerSingular: "desarrollador",
+          developerPlural: "desarrolladores",
+          methodology: "Metodología",
+          repository: "Repositorio",
+          viewOnGithub: "Ver en GitHub",
+          privateRepo: "Privado - Proyecto gubernamental",
+          problem: "Problema",
+          solution: "Solución",
+          keyFeatures: "Características clave",
+          architecture: "Arquitectura del sistema",
+          impact: "Impacto",
+          technicalChallenges: "Desafíos técnicos",
+          technicalDecisions: "Decisiones técnicasw clave",
+          interfacePreview: "Vista previa de la interfaz",
+          screenshotLabel: "Captura",
+          previewAlt: "Vista previa del proyecto",
+        }
+      : {
+          swipeHint: "Use the buttons to navigate",
+          back: "Back",
+          statusCompleted: "Completed",
+          statusInProgress: "In progress",
+          team: "Team",
+          developerSingular: "developer",
+          developerPlural: "developers",
+          methodology: "Methodology",
+          repository: "Repository",
+          viewOnGithub: "View on GitHub",
+          privateRepo: "Private - Government project",
+          problem: "Problem",
+          solution: "Solution",
+          keyFeatures: "Key features",
+          architecture: "System architecture",
+          impact: "Impact",
+          technicalChallenges: "Technical challenges",
+          technicalDecisions: "Key technical decisions",
+          interfacePreview: "Interface preview",
+          screenshotLabel: "Screenshot",
+          previewAlt: "Project preview",
+        };
 
   return (
     <div className="px-4 sm:px-6 md:px-8 lg:px-10 relative min-h-screen text-neutral-900">
       <div className="relative z-10">
-        {/* HERO */}
-        <section className="max-w-7xl mx-auto mt-12 mb-12 ">
-          {/* Back button row */}
-          <div className="mb-6">
-            <a href="/">
-              <Button
-                className="group inline-flex items-center gap-2 rounded-xl backdrop-blur-xl bg-white/15
-                 border border-white/30 text-sm font-medium text-neutral-900 hover:bg-white/25 hover:scale-103"
-              >
+        <section className="max-w-7xl mx-auto mt-12 mb-12">
+          <div className="mb-6 flex items-center justify-between gap-3">
+            <a href={onBack}>
+              <Button className="group inline-flex items-center gap-2 rounded-xl backdrop-blur-xl bg-white/15 border border-white/30 text-sm font-medium text-neutral-900 hover:bg-white/25 hover:scale-103">
                 <ArrowLeft
                   size={16}
                   className="transition-transform duration-300 group-hover:-translate-x-1"
                 />
-                Volver
+                {t.back}
               </Button>
             </a>
+            <LanguageSwitcher locale={locale} switchToPath={switchToPath} />
           </div>
 
-          {/* Hero Card */}
-          <div
-            className="grid md:grid-cols-2 gap-12 items-center rounded-3xl p-10 backdrop-blur-2xl bg-white/20
-               border border-white/30 shadow-2xl ring-1 ring-white/40"
-          >
+          <div className="grid md:grid-cols-2 gap-12 items-center rounded-3xl p-10 backdrop-blur-2xl bg-white/20 border border-white/30 shadow-2xl ring-1 ring-white/40">
             <div>
               <div className="flex items-center gap-2 mb-3 text-sm text-neutral-800">
                 <span>
@@ -193,9 +233,9 @@ export const ProjectDetailPage = ({ project }: ProjectDetailPageProps) => {
                   }`}
                 >
                   {project.status === "completed"
-                    ? "Completado"
+                    ? t.statusCompleted
                     : project.status === "in-progress"
-                      ? "En progreso"
+                      ? t.statusInProgress
                       : project.status}
                 </span>
               </div>
@@ -214,7 +254,7 @@ export const ProjectDetailPage = ({ project }: ProjectDetailPageProps) => {
                 <source srcSet={project.images[0]} type="image/webp" />
                 <img
                   src={project.images[0]}
-                  alt="Project preview"
+                  alt={t.previewAlt}
                   className="rounded-2xl border border-white/40 shadow-2xl w-full h-auto"
                   loading="lazy"
                   decoding="async"
@@ -225,11 +265,9 @@ export const ProjectDetailPage = ({ project }: ProjectDetailPageProps) => {
           </div>
         </section>
 
-        {/* TECHNICAL DETAILS */}
         <section className="max-w-7xl mx-auto pb-12">
           <div className="rounded-2xl p-6 backdrop-blur-xl bg-white/20 border border-white/30 ring-1 ring-white/20">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-px rounded-xl overflow-hidden">
-              {/* Stack */}
               {project.stack && (
                 <div className="p-5">
                   <div className="flex items-center gap-2 mb-3">
@@ -251,33 +289,31 @@ export const ProjectDetailPage = ({ project }: ProjectDetailPageProps) => {
                 </div>
               )}
 
-              {/* Team */}
               {project.teamSize && (
                 <div className="p-5">
                   <div className="flex items-center gap-2 mb-3">
                     <Users size={14} className="text-neutral-600" />
                     <h3 className="text-xs uppercase tracking-widest text-neutral-600 font-medium">
-                      Equipo
+                      {t.team}
                     </h3>
                   </div>
                   <p className="text-sm text-neutral-800 font-medium">
                     {project.teamSize}{" "}
                     <span className="font-normal text-neutral-600">
                       {project.teamSize === 1
-                        ? "desarrollador"
-                        : "desarrolladores"}
+                        ? t.developerSingular
+                        : t.developerPlural}
                     </span>
                   </p>
                 </div>
               )}
 
-              {/* Methodology */}
               {project.methodology && (
                 <div className="p-5">
                   <div className="flex items-center gap-2 mb-3">
                     <GitBranch size={14} className="text-neutral-600" />
                     <h3 className="text-xs uppercase tracking-widest text-neutral-600 font-medium">
-                      Metodología
+                      {t.methodology}
                     </h3>
                   </div>
                   <p className="text-sm text-neutral-800">
@@ -286,13 +322,12 @@ export const ProjectDetailPage = ({ project }: ProjectDetailPageProps) => {
                 </div>
               )}
 
-              {/* Repository */}
               {project.githubUrl ? (
                 <div className="p-5">
                   <div className="flex items-center gap-2 mb-3">
                     <ExternalLink size={14} className="text-neutral-500" />
                     <h3 className="text-xs uppercase tracking-widest text-neutral-500 font-medium">
-                      Repositorio
+                      {t.repository}
                     </h3>
                   </div>
                   <a
@@ -301,7 +336,7 @@ export const ProjectDetailPage = ({ project }: ProjectDetailPageProps) => {
                     rel="noopener noreferrer"
                     className="text-sm text-neutral-900 underline underline-offset-2 hover:text-neutral-600 transition-colors flex items-center gap-1"
                   >
-                    Ver en GitHub
+                    {t.viewOnGithub}
                     <ExternalLink size={11} />
                   </a>
                 </div>
@@ -310,12 +345,12 @@ export const ProjectDetailPage = ({ project }: ProjectDetailPageProps) => {
                   <div className="flex items-center gap-2 mb-3">
                     <Lock size={14} className="text-neutral-500" />
                     <h3 className="text-xs uppercase tracking-widest text-neutral-500 font-medium">
-                      Repositorio
+                      {t.repository}
                     </h3>
                   </div>
                   <p className="text-sm text-neutral-600 flex items-center gap-1.5">
                     <Lock size={12} className="shrink-0" />
-                    Privado — Proyecto Gubernamental
+                    {t.privateRepo}
                   </p>
                 </div>
               ) : null}
@@ -323,15 +358,13 @@ export const ProjectDetailPage = ({ project }: ProjectDetailPageProps) => {
           </div>
         </section>
 
-        {/* PROBLEM / SOLUTION */}
         <section className="max-w-7xl mx-auto pb-12 grid md:grid-cols-2 gap-10">
           {[project.problem, project.solution].map(
             (content, i) =>
               content && (
                 <div
                   key={i}
-                  className="rounded-2xl p-8 backdrop-blur-xl bg-white/15 border border-white/30
-                  shadow-2xl ring-1 ring-white/30"
+                  className="rounded-2xl p-8 backdrop-blur-xl bg-white/15 border border-white/30 shadow-2xl ring-1 ring-white/30"
                 >
                   <div className="flex items-center gap-3 mb-4">
                     {i === 0 ? (
@@ -346,7 +379,7 @@ export const ProjectDetailPage = ({ project }: ProjectDetailPageProps) => {
                       />
                     )}
                     <h2 className="text-xl font-semibold">
-                      {i === 0 ? "Problema" : "Solución"}
+                      {i === 0 ? t.problem : t.solution}
                     </h2>
                   </div>
                   <p className="text-neutral-800 leading-7 text-sm">
@@ -357,22 +390,20 @@ export const ProjectDetailPage = ({ project }: ProjectDetailPageProps) => {
           )}
         </section>
 
-        {/* FEATURES */}
         {project.keyFeatures && (
           <section className="max-w-7xl mx-auto pb-12">
             <div className="flex items-center gap-3 mb-5">
               <Sparkles size={18} className="text-neutral-600" />
               <h2 className="text-2xl font-semibold tracking-tight">
-                Características clave
+                {t.keyFeatures}
               </h2>
             </div>
 
             <div className="grid md:grid-cols-3 gap-4">
-              {project.keyFeatures.map((f) => (
+              {project.keyFeatures.map((feature) => (
                 <div
-                  key={f}
-                  className="group relative rounded-2xl p-6 backdrop-blur-lg bg-white/10 hover:bg-white/20 border border-white/30 
-                  ring-1 ring-white/20 shadow-2xl duration-300"
+                  key={feature}
+                  className="group relative rounded-2xl p-6 backdrop-blur-lg bg-white/10 hover:bg-white/20 border border-white/30 ring-1 ring-white/20 shadow-2xl duration-300"
                 >
                   <div className="flex items-start gap-3">
                     <CheckCircle2
@@ -380,7 +411,7 @@ export const ProjectDetailPage = ({ project }: ProjectDetailPageProps) => {
                       className="mt-0.5 shrink-0 text-neutral-600 group-hover:text-neutral-700 transition-colors"
                     />
                     <p className="text-neutral-800 text-sm leading-6 relative z-10">
-                      {f}
+                      {feature}
                     </p>
                   </div>
                 </div>
@@ -389,7 +420,6 @@ export const ProjectDetailPage = ({ project }: ProjectDetailPageProps) => {
           </section>
         )}
 
-        {/* ARCHITECTURE / IMPACT */}
         {(project.architecture || project.impact) && (
           <section className="max-w-7xl mx-auto pb-12">
             <div className="grid md:grid-cols-2 gap-6">
@@ -397,9 +427,7 @@ export const ProjectDetailPage = ({ project }: ProjectDetailPageProps) => {
                 <div className="rounded-3xl p-10 backdrop-blur-2xl bg-white/15 border border-white/30 shadow-2xl">
                   <div className="flex items-center gap-3 mb-6">
                     <Network size={18} className="text-neutral-600 shrink-0" />
-                    <h2 className="text-xl font-semibold">
-                      Arquitectura del sistema
-                    </h2>
+                    <h2 className="text-xl font-semibold">{t.architecture}</h2>
                   </div>
                   <p className="text-neutral-800 leading-7">
                     {project.architecture}
@@ -414,7 +442,7 @@ export const ProjectDetailPage = ({ project }: ProjectDetailPageProps) => {
                       size={18}
                       className="text-neutral-600 shrink-0"
                     />
-                    <h2 className="text-xl font-semibold">Impacto</h2>
+                    <h2 className="text-xl font-semibold">{t.impact}</h2>
                   </div>
                   <p className="text-neutral-800 leading-7">{project.impact}</p>
                 </div>
@@ -423,13 +451,14 @@ export const ProjectDetailPage = ({ project }: ProjectDetailPageProps) => {
           </section>
         )}
 
-        {/* Challenges */}
         <section className="max-w-7xl mx-auto pb-12 grid md:grid-cols-2 gap-10">
           {project.challenges && (
             <div className="rounded-3xl p-10 backdrop-blur-2xl bg-white/15 border border-white/30 shadow-2xl">
               <div className="flex items-center gap-3 mb-6">
                 <Wrench size={16} className="text-neutral-600 shrink-0" />
-                <h2 className="text-xl font-semibold">Desafíos técnicos</h2>
+                <h2 className="text-xl font-semibold">
+                  {t.technicalChallenges}
+                </h2>
               </div>
               <ul className="space-y-3">
                 {project.challenges.map((challenge) => (
@@ -450,7 +479,7 @@ export const ProjectDetailPage = ({ project }: ProjectDetailPageProps) => {
               <div className="flex items-center gap-3 mb-6">
                 <GitMerge size={16} className="text-neutral-600 shrink-0" />
                 <h2 className="text-xl font-semibold">
-                  Decisiones técnicas clave
+                  {t.technicalDecisions}
                 </h2>
               </div>
               <ul className="space-y-3">
@@ -477,7 +506,6 @@ export const ProjectDetailPage = ({ project }: ProjectDetailPageProps) => {
           </div>
         )}
 
-        {/* GALLERY */}
         {galleryImages.length > 0 && (
           <section className="max-w-7xl mx-auto pb-12">
             <div className="flex items-center gap-3 mb-5">
@@ -485,9 +513,7 @@ export const ProjectDetailPage = ({ project }: ProjectDetailPageProps) => {
                 size={18}
                 className="text-neutral-600 shrink-0"
               />
-              <h2 className="text-2xl font-semibold">
-                Vista previa de la interfaz
-              </h2>
+              <h2 className="text-2xl font-semibold">{t.interfacePreview}</h2>
             </div>
 
             <div className="grid md:grid-cols-2 gap-8">
@@ -495,16 +521,13 @@ export const ProjectDetailPage = ({ project }: ProjectDetailPageProps) => {
                 <div
                   key={i}
                   onClick={() => setLightboxIndex(i)}
-                  className="group relative rounded-2xl p-3 cursor-zoom-in
-                    bg-white/10 backdrop-blur-sm
-                    border border-white/30 ring-1 ring-white/30
-                    shadow-2xl transition-transform hover:scale-[1.015]"
+                  className="group relative rounded-2xl p-3 cursor-zoom-in bg-white/10 backdrop-blur-sm border border-white/30 ring-1 ring-white/30 shadow-2xl transition-transform hover:scale-[1.015]"
                 >
                   <picture>
                     <source srcSet={img} type="image/webp" />
                     <img
                       src={img}
-                      alt={`Screenshot ${i + 1}`}
+                      alt={`${t.screenshotLabel} ${i + 1}`}
                       loading={i === 0 ? "eager" : "lazy"}
                       decoding="async"
                       fetchPriority={i === 0 ? "high" : "auto"}
@@ -512,16 +535,8 @@ export const ProjectDetailPage = ({ project }: ProjectDetailPageProps) => {
                       style={{ imageRendering: "crisp-edges" }}
                     />
                   </picture>
-                  {/* Hover overlay */}
-                  <div
-                    className="absolute inset-3 rounded-xl flex items-center justify-center
-                    bg-black/0 group-hover:bg-black/25 transition-colors"
-                  >
-                    <div
-                      className="opacity-0 group-hover:opacity-100 transition-opacity
-                      bg-white/20 backdrop-blur-sm border border-white/30
-                      rounded-full p-3 shadow-lg"
-                    >
+                  <div className="absolute inset-3 rounded-xl flex items-center justify-center bg-black/0 group-hover:bg-black/25 transition-colors">
+                    <div className="opacity-0 group-hover:opacity-100 transition-opacity bg-white/20 backdrop-blur-sm border border-white/30 rounded-full p-3 shadow-lg">
                       <ZoomIn size={20} className="text-white" />
                     </div>
                   </div>
@@ -532,12 +547,13 @@ export const ProjectDetailPage = ({ project }: ProjectDetailPageProps) => {
         )}
       </div>
 
-      {/* LIGHTBOX */}
       {lightboxIndex !== null && (
         <Lightbox
           images={galleryImages}
           startIndex={lightboxIndex}
           onClose={() => setLightboxIndex(null)}
+          screenshotLabel={t.screenshotLabel}
+          swipeHint={t.swipeHint}
         />
       )}
     </div>

@@ -3,16 +3,21 @@ import { scrollToSection } from "@/utils/scrollToSection";
 import { useScrolled } from "@/hooks/useScrolled";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-import cv from "@/assets/about-me/CV_Cristobal_Coronel_Chambe.pdf";
+import { LanguageSwitcher } from "@/components/shared/LanguageSwitcher";
+import { getDictionary } from "@/i18n/dictionary";
+import type { Locale } from "@/i18n/types";
+import cvEs from "@/assets/about-me/CV_Cristobal_Coronel_Chambe.pdf";
+import cvEn from "@/assets/about-me/CV_Cristobal_Coronel_English.pdf";
 
-const navLinks = [
-  { label: "Inicio", href: "#hero" },
-  { label: "Sobre mí", href: "#about" },
-  { label: "Proyectos", href: "#projects" },
-  { label: "Contacto", href: "#contact" },
-];
+interface NavbarProps {
+  locale: Locale;
+  switchToPath: string;
+}
 
-export const Navbar = () => {
+export const Navbar = ({ locale, switchToPath }: NavbarProps) => {
+  const dict = getDictionary(locale);
+  const navLinks = dict.navbar.links;
+  const cv = locale === "en" ? cvEn : cvEs;
   const isScrolled = useScrolled(50);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
@@ -119,9 +124,15 @@ export const Navbar = () => {
                 : "bg-white/30 text-slate-800 border border-white/50 px-4 lg:px-6 py-2.5 lg:py-3 text-sm lg:text-base hover:bg-white/40",
             )}
           >
-            <span className="hidden lg:inline">Descargar currículum</span>
-            <span className="lg:hidden">currículum</span>
+            <span className="hidden lg:inline">
+              {dict.navbar.downloadCvLong}
+            </span>
+            <span className="lg:hidden">{dict.navbar.downloadCvShort}</span>
           </a>
+
+          <div className="hidden md:block">
+            <LanguageSwitcher locale={locale} switchToPath={switchToPath} />
+          </div>
 
           {/* Mobile Menu Button */}
           <button
@@ -129,7 +140,7 @@ export const Navbar = () => {
               isMobileMenuOpen ? closeMobileMenu() : openMobileMenu()
             }
             className="md:hidden p-2 rounded-lg backdrop-blur-md transition-all duration-400 relative z-60"
-            aria-label="Toggle menu"
+            aria-label={dict.navbar.toggleMenuAria}
           >
             {isMobileMenuOpen ? (
               <X className="w-5 h-5 text-slate-800" />
@@ -186,8 +197,15 @@ export const Navbar = () => {
                 rel="noopener noreferrer"
                 className="block w-full px-6 py-3 bg-white/60 text-slate-800 border border-white rounded-2xl transition-all duration-400 text-center"
               >
-                Descargar currículum
+                {dict.navbar.downloadCvLong}
               </a>
+              <div className="mt-3">
+                <LanguageSwitcher
+                  locale={locale}
+                  switchToPath={switchToPath}
+                  className="flex w-full items-center justify-center gap-2 rounded-2xl border border-white/70 bg-white/70 px-4 py-3 text-sm font-semibold text-slate-800"
+                />
+              </div>
             </div>
           </div>
         </div>

@@ -1,5 +1,5 @@
 ---
-import "../../styles/global.css";
+import "../../../styles/global.css";
 
 import Layout from "@/layouts/Layout.astro";
 import BgAnimated from "@/layouts/BgAnimated.astro";
@@ -17,20 +17,20 @@ export function getStaticPaths() {
 }
 
 const { id } = Astro.props;
-const project = getProjectById(id, "es");
+const project = getProjectById(id, "en");
 
 if (!project) {
   throw new Error(`Project not found: ${id}`);
 }
 ---
 
-<Layout locale="es">
+<Layout locale="en">
   <BgAnimated>
     <ProjectDetailPage
       project={project}
-      locale="es"
-      onBack="/"
-      switchToPath={`/en/projects/${project.id}`}
+      locale="en"
+      onBack="/en"
+      switchToPath={`/projects/${project.id}`}
       client:load
     />
   </BgAnimated>
