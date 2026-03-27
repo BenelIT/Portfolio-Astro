@@ -3,7 +3,6 @@ import { scrollToSection } from "@/utils/scrollToSection";
 import { useScrolled } from "@/hooks/useScrolled";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-import { LanguageSwitcher } from "@/components/shared/LanguageSwitcher";
 import { getDictionary } from "@/i18n/dictionary";
 import type { Locale } from "@/i18n/types";
 import cvEs from "@/assets/about-me/CV_Cristobal_Coronel_Chambe.pdf";
@@ -130,10 +129,6 @@ export const Navbar = ({ locale, switchToPath }: NavbarProps) => {
             <span className="lg:hidden">{dict.navbar.downloadCvShort}</span>
           </a>
 
-          <div className="hidden md:block">
-            <LanguageSwitcher locale={locale} switchToPath={switchToPath} />
-          </div>
-
           {/* Mobile Menu Button */}
           <button
             onClick={() =>
@@ -199,13 +194,6 @@ export const Navbar = ({ locale, switchToPath }: NavbarProps) => {
               >
                 {dict.navbar.downloadCvLong}
               </a>
-              <div className="mt-3">
-                <LanguageSwitcher
-                  locale={locale}
-                  switchToPath={switchToPath}
-                  className="flex w-full items-center justify-center gap-2 rounded-2xl border border-white/70 bg-white/70 px-4 py-3 text-sm font-semibold text-slate-800"
-                />
-              </div>
             </div>
           </div>
         </div>

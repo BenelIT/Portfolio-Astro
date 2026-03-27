@@ -3,6 +3,7 @@ import "../../../styles/global.css";
 
 import Layout from "@/layouts/Layout.astro";
 import BgAnimated from "@/layouts/BgAnimated.astro";
+import { FloatingLanguageSwitcher } from "@/components/shared/FloatingLanguageSwitcher";
 import {
   getProjectById,
   getProjectIds,
@@ -32,6 +33,11 @@ if (!project) {
       onBack="/en"
       switchToPath={`/projects/${project.id}`}
       client:load
+    />
+    <FloatingLanguageSwitcher
+      locale="en"
+      switchToPath={`/projects/${project.id}`}
+      client:idle
     />
   </BgAnimated>
 </Layout>

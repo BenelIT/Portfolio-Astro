@@ -45,14 +45,25 @@ const ogLocale = locale === "es" ? "es_ES" : "en_US";
         const preferred = window.localStorage.getItem("preferred-language");
         const path = window.location.pathname;
 
-        if (preferred === "en" && !path.startsWith("/en")) {
-          window.location.replace(path === "/" ? "/en" : `/en${path}`);
+        // Si no hay preferencia guardada, asegurar que esté en inglés (/) por defecto
+        if (!preferred) {
+          if (path.startsWith("/es")) {
+            window.location.replace(path.replace(/^\/es/, "") || "/");
+            return;
+          }
+          window.localStorage.setItem("preferred-language", "en");
           return;
         }
 
-        if (preferred === "es" && path.startsWith("/en")) {
-          const next = path === "/en" ? "/" : path.replace(/^\/en/, "");
-          window.location.replace(next || "/");
+        // Si prefiere español, asegurar que esté en /es
+        if (preferred === "es" && !path.startsWith("/es")) {
+          window.location.replace(path === "/" ? "/es" : `/es${path}`);
+          return;
+        }
+
+        // Si prefiere inglés, asegurar que NO esté en /es
+        if (preferred === "en" && path.startsWith("/es")) {
+          window.location.replace(path.replace(/^\/es/, "") || "/");
         }
       })();
     </script>

@@ -1,16 +1,14 @@
 import type { Locale } from "@/i18n/types";
 
-interface LanguageSwitcherProps {
+interface FloatingLanguageSwitcherProps {
   locale: Locale;
   switchToPath: string;
-  className?: string;
 }
 
-export const LanguageSwitcher = ({
+export const FloatingLanguageSwitcher = ({
   locale,
   switchToPath,
-  className,
-}: LanguageSwitcherProps) => {
+}: FloatingLanguageSwitcherProps) => {
   const nextLocale = locale === "es" ? "en" : "es";
 
   const labels = {
@@ -37,10 +35,7 @@ export const LanguageSwitcher = ({
       href={switchToPath}
       onClick={onSwitch}
       aria-label={labels[locale].aria}
-      className={
-        className ??
-        "inline-flex items-center gap-2 rounded-xl border border-white/50 bg-white/35 px-3 py-2 text-xs font-semibold text-slate-800 backdrop-blur-md transition-all duration-300 hover:bg-white/55"
-      }
+      className="fixed bottom-6 right-6 z-40 inline-flex items-center gap-2 rounded-full border border-white/50 bg-white/35 px-4 py-3 text-xs font-semibold text-slate-800 backdrop-blur-md transition-all duration-300 hover:bg-white/55 hover:scale-110 shadow-lg hover:shadow-xl md:bottom-8 md:right-8"
     >
       <span className="opacity-60">{labels[locale].current}</span>
       <span className="opacity-40">/</span>

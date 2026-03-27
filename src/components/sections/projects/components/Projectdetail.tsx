@@ -180,22 +180,22 @@ export const ProjectDetailPage = ({
           swipeHint: "Use the buttons to navigate",
           back: "Back",
           statusCompleted: "Completed",
-          statusInProgress: "In progress",
+          statusInProgress: "In Progress",
           team: "Team",
           developerSingular: "developer",
           developerPlural: "developers",
           methodology: "Methodology",
           repository: "Repository",
           viewOnGithub: "View on GitHub",
-          privateRepo: "Private - Government project",
+          privateRepo: "Private - Government Project",
           problem: "Problem",
           solution: "Solution",
-          keyFeatures: "Key features",
-          architecture: "System architecture",
+          keyFeatures: "Key Features",
+          architecture: "System Architecture",
           impact: "Impact",
-          technicalChallenges: "Technical challenges",
-          technicalDecisions: "Key technical decisions",
-          interfacePreview: "Interface preview",
+          technicalChallenges: "Technical Challenges",
+          technicalDecisions: "Key Technical Decisions",
+          interfacePreview: "Interface Preview",
           screenshotLabel: "Screenshot",
           previewAlt: "Project preview",
         };
@@ -214,7 +214,6 @@ export const ProjectDetailPage = ({
                 {t.back}
               </Button>
             </a>
-            <LanguageSwitcher locale={locale} switchToPath={switchToPath} />
           </div>
 
           <div className="grid md:grid-cols-2 gap-12 items-center rounded-3xl p-10 backdrop-blur-2xl bg-white/20 border border-white/30 shadow-2xl ring-1 ring-white/40">

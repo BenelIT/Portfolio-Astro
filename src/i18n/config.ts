@@ -1,19 +1,21 @@
 import type { Locale } from "./types";
 
-export const DEFAULT_LOCALE: Locale = "es";
+export const DEFAULT_LOCALE: Locale = "en";
 
 export function normalizeLocale(value: unknown): Locale {
-  return value === "en" ? "en" : DEFAULT_LOCALE;
+  return value === "es" ? "es" : DEFAULT_LOCALE;
 }
 
 export function getAlternatePath(pathname: string, locale: Locale): string {
-  if (locale === "es") {
-    return pathname === "/" ? "/en" : `/en${pathname}`;
+  if (locale === "en") {
+    // From English to Spanish: /projects/123 → /es/projects/123
+    return pathname === "/" ? "/es" : `/es${pathname}`;
   }
 
-  if (pathname === "/en") {
+  // From Spanish to English: /es/projects/123 → /projects/123
+  if (pathname === "/es") {
     return "/";
   }
 
-  return pathname.replace(/^\/en/, "") || "/";
+  return pathname.replace(/^\/es/, "") || "/";
 }

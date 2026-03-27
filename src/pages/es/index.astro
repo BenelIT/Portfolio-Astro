@@ -1,7 +1,7 @@
 ---
 import { Toaster } from "sonner";
 
-import "../styles/global.css";
+import "../../styles/global.css";
 
 import { Navbar } from "@/layouts/Navbar";
 import BgAnimated from "@/layouts/BgAnimated.astro";
@@ -14,15 +14,15 @@ import ContactSection from "@/components/sections/contact/ContactSection.astro";
 import Footer from "@/layouts/Footer.astro";
 ---
 
-<Layout locale="en">
+<Layout locale="es">
   <BgAnimated>
-    <Navbar locale="en" switchToPath="/es" client:idle />
-    <Hero locale="en" />
-    <AboutSection locale="en" />
-    <ProjectsSection locale="en" />
-    <ContactSection locale="en" />
-    <Footer locale="en" />
-    <FloatingLanguageSwitcher locale="en" switchToPath="/es" client:idle />
+    <Navbar locale="es" switchToPath="/" client:idle />
+    <Hero locale="es" />
+    <AboutSection locale="es" />
+    <ProjectsSection locale="es" />
+    <ContactSection locale="es" />
+    <Footer locale="es" />
+    <FloatingLanguageSwitcher locale="es" switchToPath="/" client:idle />
   </BgAnimated>
   <Toaster client:idle richColors position="top-left" />
 </Layout>

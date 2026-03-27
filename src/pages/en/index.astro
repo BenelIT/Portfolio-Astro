@@ -6,6 +6,7 @@ import "../../styles/global.css";
 import { Navbar } from "@/layouts/Navbar";
 import BgAnimated from "@/layouts/BgAnimated.astro";
 import Layout from "@/layouts/Layout.astro";
+import { FloatingLanguageSwitcher } from "@/components/shared/FloatingLanguageSwitcher";
 import Hero from "@/components/sections/hero/Hero.astro";
 import AboutSection from "@/components/sections/about/AboutSection.astro";
 import ProjectsSection from "@/components/sections/projects/ProjectsSection.astro";
@@ -21,6 +22,7 @@ import Footer from "@/layouts/Footer.astro";
     <ProjectsSection locale="en" />
     <ContactSection locale="en" />
     <Footer locale="en" />
+    <FloatingLanguageSwitcher locale="en" switchToPath="/" client:idle />
   </BgAnimated>
   <Toaster client:idle richColors position="top-left" />
 </Layout>
